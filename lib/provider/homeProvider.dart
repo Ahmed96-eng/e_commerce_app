@@ -14,7 +14,7 @@ class HomeProvider with ChangeNotifier {
       price: 25.99,
       imageUrl:
           'https://images-na.ssl-images-amazon.com/images/I/71oP3EMX4hL._UL1500_.jpg',
-      quantity: 5,
+      quantity: 1,
     ),
     Product(
       id: '2',
@@ -24,7 +24,7 @@ class HomeProvider with ChangeNotifier {
       price: 50.99,
       imageUrl:
           'https://5.imimg.com/data5/GU/LY/MY-44393694/men-sneaker-shoes-500x500.jpg',
-      quantity: 4,
+      quantity: 1,
     ),
     Product(
       id: '3',
@@ -33,7 +33,7 @@ class HomeProvider with ChangeNotifier {
       price: 20.25,
       imageUrl:
           'https://images-na.ssl-images-amazon.com/images/I/71OCUKectKL._UX395_.jpg',
-      quantity: 3,
+      quantity: 1,
     ),
     Product(
       id: '4',
@@ -42,7 +42,7 @@ class HomeProvider with ChangeNotifier {
       price: 30.99,
       imageUrl:
           'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg',
-      quantity: 5,
+      quantity: 1,
     ),
   ];
   List<Product> _watchItems = [
@@ -52,7 +52,7 @@ class HomeProvider with ChangeNotifier {
       description: 'Watch 1 description',
       price: 25.99,
       imageUrl: 'https://www.amazon.in/images/I/61WixzlVuXL.jpg',
-      quantity: 5,
+      quantity: 1,
     ),
     Product(
       id: '34',
@@ -62,7 +62,7 @@ class HomeProvider with ChangeNotifier {
       price: 25.99,
       imageUrl:
           'https://www.ablogtowatch.com/wp-content/uploads/2019/09/eBay-Omega-2.jpeg',
-      quantity: 4,
+      quantity: 1,
     ),
   ];
   List<Product> _jacketItems = [
@@ -73,7 +73,7 @@ class HomeProvider with ChangeNotifier {
       price: 25.99,
       imageUrl:
           'https://cdn-images.farfetch-contents.com/14/70/76/45/14707645_25035903_600.jpg',
-      quantity: 5,
+      quantity: 1,
     ),
     Product(
       id: '41',
@@ -83,7 +83,7 @@ class HomeProvider with ChangeNotifier {
       price: 25.99,
       imageUrl:
           'https://cf5.s3.souqcdn.com/item/2019/12/12/94/96/25/28/item_XL_94962528_f6d4794cb507c.jpg',
-      quantity: 4,
+      quantity: 1,
     ),
   ];
   List<Product> _shirtItems = [
@@ -94,7 +94,7 @@ class HomeProvider with ChangeNotifier {
       price: 25.99,
       imageUrl:
           'https://lcw.akinoncdn.com/products/2020/03/10/1525250/354b1db1-b122-4130-8cea-2ee8d01d6eac_size561x730.jpg',
-      quantity: 5,
+      quantity: 1,
     ),
     Product(
       id: '25',
@@ -104,7 +104,7 @@ class HomeProvider with ChangeNotifier {
       price: 25.99,
       imageUrl:
           'https://lcw.akinoncdn.com/products/2020/02/26/1208380/b569b97a-1f1d-4a37-8045-b317066674fb_size561x730.jpg',
-      quantity: 4,
+      quantity: 1,
     ),
   ];
   List<Product> get snackersItems => _snackersItems;

@@ -81,9 +81,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: TabBar(
+                      labelColor: Colors.redAccent.withOpacity(0.9),
                       indicatorPadding: EdgeInsets.only(bottom: -5),
                       isScrollable: true,
-                      unselectedLabelColor: Colors.redAccent.withOpacity(0.9),
+                      unselectedLabelColor: Colors.black,
                       indicatorColor: Colors.redAccent.withOpacity(0.9),
                       tabs: [
                         customTabs(
