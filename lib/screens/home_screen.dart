@@ -90,19 +90,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         customTabs(
                             title: 'Snackers',
                             imageUrl:
-                                'https://upload.wikimedia.org/wikipedia/commons/f/f7/Mozilla_Thunderbird_logo.png'),
+                                'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg'),
                         customTabs(
                             title: 'Watch',
                             imageUrl:
-                                'https://upload.wikimedia.org/wikipedia/commons/f/f7/Mozilla_Thunderbird_logo.png'),
+                                'https://www.amazon.in/images/I/61WixzlVuXL.jpg'),
                         customTabs(
                             title: 'jaket',
                             imageUrl:
-                                'https://upload.wikimedia.org/wikipedia/commons/f/f7/Mozilla_Thunderbird_logo.png'),
+                                'https://cdn-images.farfetch-contents.com/14/70/76/45/14707645_25035903_600.jpg'),
                         customTabs(
                             title: 'Shirt',
                             imageUrl:
-                                'https://upload.wikimedia.org/wikipedia/commons/f/f7/Mozilla_Thunderbird_logo.png'),
+                                'https://lcw.akinoncdn.com/products/2020/03/10/1525250/354b1db1-b122-4130-8cea-2ee8d01d6eac_size561x730.jpg'),
                       ]),
                 ),
               ],
