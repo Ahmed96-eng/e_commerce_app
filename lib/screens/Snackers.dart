@@ -28,6 +28,7 @@ class _SnackerScreenState extends State<SnackerScreen> {
                     title: homeProvider.snackersItems[index].title,
                     imagUrl: homeProvider.snackersItems[index].imageUrl,
                     price: homeProvider.snackersItems[index].price,
+                    description: homeProvider.snackersItems[index].description,
                     quantity: homeProvider.snackersItems[index].quantity,
                   ),
                   onTap: () {

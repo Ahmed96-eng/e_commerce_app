@@ -2,25 +2,27 @@ class Favorite {
   String id;
   String title;
   String imageUrl;
-  String description;
   double price;
+  String description;
   int quantity;
-
+  bool isFavorite;
   Favorite({
     this.id,
     this.title,
     this.imageUrl,
-    this.description,
     this.price,
+    this.description,
     this.quantity,
+    this.isFavorite = false,
   });
 
   Favorite.fromjson(Map<String, dynamic> jsonObject) {
     this.id = jsonObject['id'];
     this.title = jsonObject['title'];
     this.imageUrl = jsonObject['imageUrl'];
-    this.description = jsonObject['description'];
     this.price = jsonObject['price'];
+    this.description = jsonObject['description'];
     this.quantity = jsonObject['quantity'];
+    this.isFavorite = jsonObject['isFavorite'];
   }
 }

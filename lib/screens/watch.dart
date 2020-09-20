@@ -28,6 +28,7 @@ class _WatchScreenState extends State<WatchScreen> {
                     title: homeProvider.watchItems[index].title,
                     imagUrl: homeProvider.watchItems[index].imageUrl,
                     price: homeProvider.watchItems[index].price,
+                    description: homeProvider.watchItems[index].description,
                     quantity: homeProvider.watchItems[index].quantity,
                   ),
                   onTap: () {

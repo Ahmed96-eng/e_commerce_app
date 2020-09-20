@@ -111,7 +111,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                   onPressed: () {
                     homeProvider.addCart(widget.id, widget.title, widget.price,
-                        widget.imagUrl, widget.quantity);
+                        widget.imagUrl, widget.description, widget.quantity);
                   },
                   color: Colors.redAccent.withOpacity(0.4),
                   highlightColor: Colors.red.withOpacity(0.4),
@@ -137,44 +137,6 @@ class _ProductDetailsState extends State<ProductDetails> {
           ])),
         ],
       ),
-
-      // appBar: AppBar(
-      //   title: Text(widget.title),
-      // ),
-
-      // body: Column(
-      //   children: [
-      // Container(
-      //   // width: 250,
-      //   height: 250,
-      //   child: Image.network(
-      //     widget.imagUrl,
-      //     fit: BoxFit.cover,
-      //   ),
-      // ),
-      // Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: Card(
-      //       child: ListTile(
-      //     title: Text(widget.title),
-      //   )),
-      // ),
-      // Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: Card(
-      //       child: ListTile(
-      //     title: Text(widget.price.toString()),
-      //   )),
-      // ),
-      // Padding(
-      //   padding: const EdgeInsets.all(8.0),
-      //   child: Card(
-      //       child: ListTile(
-      //     title: Text(widget.description),
-      //   )),
-      // ),
-      //   ],
-      // ),
     );
   }
 }

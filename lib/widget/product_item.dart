@@ -43,6 +43,7 @@ class _ProductItemState extends State<ProductItem> {
                         onPressed: () {
                           setState(() {
                             _isFavorite = !_isFavorite;
+
                             if (_isFavorite) {
                               homeProvider.addFavorite(
                                   widget.id,

@@ -28,6 +28,7 @@ class _JacketScreenState extends State<JacketScreen> {
                     title: homeProvider.jacketItems[index].title,
                     imagUrl: homeProvider.jacketItems[index].imageUrl,
                     price: homeProvider.jacketItems[index].price,
+                    description: homeProvider.jacketItems[index].description,
                     quantity: homeProvider.jacketItems[index].quantity,
                   ),
                   onTap: () {

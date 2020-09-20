@@ -28,6 +28,7 @@ class _ShirtScreenState extends State<ShirtScreen> {
                     title: homeProvider.shirtItems[index].title,
                     imagUrl: homeProvider.shirtItems[index].imageUrl,
                     price: homeProvider.shirtItems[index].price,
+                    description: homeProvider.shirtItems[index].description,
                     quantity: homeProvider.shirtItems[index].quantity,
                   ),
                   onTap: () {

@@ -3,6 +3,7 @@ class Cart {
   String title;
   String imageUrl;
   double price;
+  String description;
   int quantity;
 
   Cart({
@@ -10,6 +11,7 @@ class Cart {
     this.title,
     this.imageUrl,
     this.price,
+    this.description,
     this.quantity,
   });
 
@@ -18,6 +20,7 @@ class Cart {
     this.title = jsonObject['title'];
     this.title = jsonObject['imageUrl'];
     this.price = jsonObject['price'];
+    this.description = jsonObject['description'];
     this.quantity = jsonObject['quantity'];
   }
 }

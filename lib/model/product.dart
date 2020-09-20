@@ -5,7 +5,6 @@ class Product {
   String description;
   double price;
   int quantity;
-  bool isFavorite;
 
   Product({
     this.id,
@@ -14,7 +13,6 @@ class Product {
     this.imageUrl,
     this.price,
     this.quantity,
-    this.isFavorite = false,
   });
 
   Product.fromjson(Map<String, dynamic> jsonObject) {

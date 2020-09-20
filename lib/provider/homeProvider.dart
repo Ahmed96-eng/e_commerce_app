@@ -139,7 +139,7 @@ class HomeProvider with ChangeNotifier {
   }
 
   void addCart(String productId, String title, double price, String imageUrl,
-      int quantity) {
+      String description, int quantity) {
     if (_cartItems.containsKey(productId)) {
       _cartItems.update(
           productId,
@@ -148,6 +148,7 @@ class HomeProvider with ChangeNotifier {
               title: existingCartItem.title,
               imageUrl: existingCartItem.imageUrl,
               price: existingCartItem.price,
+              description: existingCartItem.description,
               quantity: existingCartItem.quantity + quantity));
     } else {
       _cartItems.putIfAbsent(
@@ -157,6 +158,7 @@ class HomeProvider with ChangeNotifier {
             title: title,
             imageUrl: imageUrl,
             price: price,
+            description: description,
             quantity: quantity),
       );
     }
@@ -204,11 +206,13 @@ class HomeProvider with ChangeNotifier {
     if (_favoriteItems[productId].quantity > 1) {
       _favoriteItems.update(
         productId,
-        (existingCartItem) => Favorite(
-          id: existingCartItem.id,
-          title: existingCartItem.title,
-          price: existingCartItem.price,
-          quantity: existingCartItem.quantity - 1,
+        (existingFavoriteItem) => Favorite(
+          id: existingFavoriteItem.id,
+          title: existingFavoriteItem.title,
+          price: existingFavoriteItem.price,
+          imageUrl: existingFavoriteItem.imageUrl,
+          description: existingFavoriteItem.description,
+          quantity: existingFavoriteItem.quantity - 1,
         ),
       );
     } else {
@@ -217,6 +221,11 @@ class HomeProvider with ChangeNotifier {
     SharedWidget.showToastMsg('Delete From Favorite Success ', time: 4);
     notifyListeners();
   }
+
+  // void togelFavorite(bool _isFavorite) {
+  //   _isFavorite = !_isFavorite;
+  //   notifyListeners();
+  // }
 
   double totalProductPrice(double price, int quantity) {
     return price * quantity;
