@@ -94,122 +94,120 @@ class _HomeScreenState extends State<HomeScreen> {
       length: 4,
       child: WillPopScope(
         onWillPop: _onWillPop,
-        child: SafeArea(
-          child: Scaffold(
-            // drawer: Drawer(),
-            appBar: AppBar(
-              title: Text('My Shop'),
-              bottom: PreferredSize(
-                preferredSize: Size.fromHeight(150),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.3),
-                              border: Border.all(color: Colors.redAccent),
-                              borderRadius: BorderRadius.circular(20)),
-                          child: TextField(
-                            controller: searchCont,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              suffixIcon: IconButton(
-                                icon: Icon(Icons.close),
-                                color: Colors.black54,
-                                onPressed: () {
-                                  searchCont.clear();
-                                  setState(() {
-                                    _searchValue = "";
-                                  });
-                                },
-                              ),
-                              prefixIcon: Icon(
-                                Icons.search,
-                                color: Colors.black,
-                              ),
+        child: Scaffold(
+          // drawer: Drawer(),
+          appBar: AppBar(
+            title: Text('My Shop'),
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(150),
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: Container(
+                        decoration: BoxDecoration(
+                            color: Colors.white.withOpacity(0.3),
+                            border: Border.all(color: Colors.redAccent),
+                            borderRadius: BorderRadius.circular(20)),
+                        child: TextField(
+                          controller: searchCont,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.close),
+                              color: Colors.black54,
+                              onPressed: () {
+                                searchCont.clear();
+                                setState(() {
+                                  _searchValue = "";
+                                });
+                              },
                             ),
-                            onChanged: (String value) {
-                              setState(() {
-                                _searchValue = value;
-                              });
-                            },
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: TabBar(
-                          labelColor: Colors.redAccent.withOpacity(0.9),
-                          indicatorPadding: EdgeInsets.only(bottom: -5),
-                          isScrollable: true,
-                          unselectedLabelColor: Colors.black,
-                          indicatorColor: Colors.redAccent.withOpacity(0.9),
-                          tabs: [
-                            customTabs(
-                                title: 'Snackers',
-                                imageUrl:
-                                    'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg'),
-                            customTabs(
-                                title: 'Watch',
-                                imageUrl:
-                                    'https://www.amazon.in/images/I/61WixzlVuXL.jpg'),
-                            customTabs(
-                                title: 'jaket',
-                                imageUrl:
-                                    'https://cdn-images.farfetch-contents.com/14/70/76/45/14707645_25035903_600.jpg'),
-                            customTabs(
-                                title: 'Shirt',
-                                imageUrl:
-                                    'https://lcw.akinoncdn.com/products/2020/03/10/1525250/354b1db1-b122-4130-8cea-2ee8d01d6eac_size561x730.jpg'),
-                          ]),
-                    ),
-                  ],
-                ),
+                            prefixIcon: Icon(
+                              Icons.search,
+                              color: Colors.black,
+                            ),
+                          ),
+                          onChanged: (String value) {
+                            setState(() {
+                              _searchValue = value;
+                            });
+                          },
+                        )),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: TabBar(
+                        labelColor: Colors.redAccent.withOpacity(0.9),
+                        indicatorPadding: EdgeInsets.only(bottom: -5),
+                        isScrollable: true,
+                        unselectedLabelColor: Colors.black,
+                        indicatorColor: Colors.redAccent.withOpacity(0.9),
+                        tabs: [
+                          customTabs(
+                              title: 'Snackers',
+                              imageUrl:
+                                  'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg'),
+                          customTabs(
+                              title: 'Watch',
+                              imageUrl:
+                                  'https://www.amazon.in/images/I/61WixzlVuXL.jpg'),
+                          customTabs(
+                              title: 'jaket',
+                              imageUrl:
+                                  'https://cdn-images.farfetch-contents.com/14/70/76/45/14707645_25035903_600.jpg'),
+                          customTabs(
+                              title: 'Shirt',
+                              imageUrl:
+                                  'https://lcw.akinoncdn.com/products/2020/03/10/1525250/354b1db1-b122-4130-8cea-2ee8d01d6eac_size561x730.jpg'),
+                        ]),
+                  ),
+                ],
               ),
-              actions: [
-                Badge(
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.favorite,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(FavoriteScreen.route);
-                    },
-                  ),
-                  value: homeProvider.favoriteCount.toString(),
-                ),
-                Badge(
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.shopping_cart,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(CartScreen.route);
-                    },
-                  ),
-                  value: homeProvider.cartCount.toString(),
-                ),
-              ],
             ),
-            drawer: Drawer(),
-            body: TabBarView(
-              children: <Widget>[
-                SnackerScreen(
-                  searchName: searchCont.text.toString(),
+            actions: [
+              Badge(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.favorite,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(FavoriteScreen.route);
+                  },
                 ),
-                WatchScreen(
-                  searchName: searchCont.text.toString(),
+                value: homeProvider.favoriteCount.toString(),
+              ),
+              Badge(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.shopping_cart,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pushNamed(CartScreen.route);
+                  },
                 ),
-                JacketScreen(
-                  searchName: searchCont.text.toString(),
-                ),
-                ShirtScreen(
-                  searchName: searchCont.text.toString(),
-                )
-              ],
-            ),
-            // bottomNavigationBar: BottomNavBarWidget(),
+                value: homeProvider.cartCount.toString(),
+              ),
+            ],
           ),
+          drawer: Drawer(),
+          body: TabBarView(
+            children: <Widget>[
+              SnackerScreen(
+                searchName: searchCont.text.toString(),
+              ),
+              WatchScreen(
+                searchName: searchCont.text.toString(),
+              ),
+              JacketScreen(
+                searchName: searchCont.text.toString(),
+              ),
+              ShirtScreen(
+                searchName: searchCont.text.toString(),
+              )
+            ],
+          ),
+          // bottomNavigationBar: BottomNavBarWidget(),
         ),
       ),
     );

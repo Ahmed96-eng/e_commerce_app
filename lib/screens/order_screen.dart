@@ -27,19 +27,17 @@ class _OrderScreenState extends State<OrderScreen> {
     return WillPopScope(
       onWillPop: _willPopScope,
       child: Consumer<HomeProvider>(
-        builder: (context, homeProvider, child) => SafeArea(
-          child: Scaffold(
-            appBar: appBarWidgit(
-                context,
-                'Order Screen',
-                homeProvider.favoriteCount.toString(),
-                homeProvider.cartCount.toString()),
-            drawer: Drawer(),
-            body: ListView.builder(
-              itemBuilder: (context, index) =>
-                  OrderItem(homeProvider.orders[index]),
-              itemCount: homeProvider.orders.length,
-            ),
+        builder: (context, homeProvider, child) => Scaffold(
+          appBar: appBarWidgit(
+              context,
+              'Order Screen',
+              homeProvider.favoriteCount.toString(),
+              homeProvider.cartCount.toString()),
+          drawer: Drawer(),
+          body: ListView.builder(
+            itemBuilder: (context, index) =>
+                OrderItem(homeProvider.orders[index]),
+            itemCount: homeProvider.orders.length,
           ),
         ),
         // bottomNavigationBar: BottomNavBarWidget(),
