@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
+import 'package:ecommerceapp/widget/appBar_widget.dart';
 import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/widget/favorite_item.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +19,11 @@ class FavoriteScreen extends StatelessWidget {
       builder: (context, homrProvider, child) => WillPopScope(
         onWillPop: _willPopScope,
         child: Scaffold(
-          appBar: AppBar(
-            title: Text('Favorite Screen'),
-            leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-          ),
+          appBar: appBarWidgit(
+              context,
+              'Favorite Screen',
+              homrProvider.favoriteCount.toString(),
+              homrProvider.cartCount.toString()),
           body: ListView.builder(
             itemCount: homrProvider.favoriteItems.length,
             itemBuilder: (context, index) => FavoriteItem(
@@ -43,7 +41,7 @@ class FavoriteScreen extends StatelessWidget {
                   homrProvider.favoriteItems.values.toList()[index].quantity,
             ),
           ),
-          bottomNavigationBar: BottomNavBarWidget(),
+          // bottomNavigationBar: BottomNavBarWidget(),
         ),
       ),
     );

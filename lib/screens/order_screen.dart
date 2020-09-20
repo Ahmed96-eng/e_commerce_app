@@ -1,4 +1,6 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
+import 'package:ecommerceapp/screens/Snackers.dart';
+import 'package:ecommerceapp/widget/appBar_widget.dart';
 import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
 import 'package:ecommerceapp/widget/order_item.dart';
@@ -13,6 +15,9 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   Future<bool> _willPopScope() async {
+    // Navigator.of(context).pushNamed(HomeScreen.route);
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
     Navigator.of(context).pop();
     return true;
   }
@@ -21,23 +26,21 @@ class _OrderScreenState extends State<OrderScreen> {
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: _willPopScope,
-      child: Scaffold(
-        appBar: AppBar(
-          title: Text('Order Screen'),
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.of(context).pop();
-              }),
-        ),
-        body: Consumer<HomeProvider>(
-          builder: (context, homeProvider, child) => ListView.builder(
+      child: Consumer<HomeProvider>(
+        builder: (context, homeProvider, child) => Scaffold(
+          appBar: appBarWidgit(
+              context,
+              'Order Screen',
+              homeProvider.favoriteCount.toString(),
+              homeProvider.cartCount.toString()),
+          drawer: Drawer(),
+          body: ListView.builder(
             itemBuilder: (context, index) =>
                 OrderItem(homeProvider.orders[index]),
             itemCount: homeProvider.orders.length,
           ),
         ),
-        bottomNavigationBar: BottomNavBarWidget(),
+        // bottomNavigationBar: BottomNavBarWidget(),
       ),
     );
   }

@@ -9,7 +9,7 @@ class ProfileScreen extends StatelessWidget {
       body: Center(
         child: Text('My Profile Screen'),
       ),
-      bottomNavigationBar: BottomNavBarWidget(),
+      // bottomNavigationBar: BottomNavBarWidget(),
     );
   }
 }

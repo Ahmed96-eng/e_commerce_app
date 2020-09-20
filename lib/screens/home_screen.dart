@@ -90,10 +90,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context);
-    return WillPopScope(
-      onWillPop: _onWillPop,
-      child: DefaultTabController(
-        length: 4,
+    return DefaultTabController(
+      length: 4,
+      child: WillPopScope(
+        onWillPop: _onWillPop,
         child: Scaffold(
           // drawer: Drawer(),
           appBar: AppBar(
@@ -190,7 +190,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-
+          drawer: Drawer(),
           body: TabBarView(
             children: <Widget>[
               SnackerScreen(
@@ -207,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
               )
             ],
           ),
-          bottomNavigationBar: BottomNavBarWidget(),
+          // bottomNavigationBar: BottomNavBarWidget(),
         ),
       ),
     );

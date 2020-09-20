@@ -30,8 +30,7 @@ class MyApp extends StatelessWidget {
 //      home: HomeScreen(),
         initialRoute: '/',
         routes: {
-          '/': (context) => HomeScreen(),
-          // BottomNavBarWidget.route: (context) => BottomNavBarWidget(),
+          '/': (context) => SplashScreen(),
           FavoriteScreen.route: (context) => FavoriteScreen(),
           CartScreen.route: (context) => CartScreen(),
           OrderScreen.route: (context) => OrderScreen(),

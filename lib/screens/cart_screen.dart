@@ -1,6 +1,7 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
 import 'package:ecommerceapp/screens/order_screen.dart';
+import 'package:ecommerceapp/widget/appBar_widget.dart';
 import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/widget/shared_widget.dart';
 import 'package:flutter/material.dart';
@@ -27,14 +28,11 @@ class _CartScreenState extends State<CartScreen> {
       builder: (context, homrProvider, child) => WillPopScope(
         onWillPop: _willPopScope,
         child: Scaffold(
-          appBar: AppBar(
-            title: Text('Cart Screen'),
-            leading: IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                }),
-          ),
+          appBar: appBarWidgit(
+              context,
+              'Cart Screen',
+              homrProvider.favoriteCount.toString(),
+              homrProvider.cartCount.toString()),
           body: Column(
             children: [
               Card(
@@ -286,7 +284,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ],
           ),
-          bottomNavigationBar: BottomNavBarWidget(),
+          // bottomNavigationBar: BottomNavBarWidget(),
         ),
       ),
     );

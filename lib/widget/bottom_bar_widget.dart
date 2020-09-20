@@ -14,7 +14,6 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int _pageIndex = 0;
 
   // List<Map<String, Object>> _pages = [
-
   //   {'page': HomeScreen()},
   //   {'page': FavoriteScreen()},
   //   {'page': CartScreen()},
@@ -24,11 +23,11 @@ class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
     setState(() {
       _pageIndex = index;
     });
-    if (index == 1) {
+    if (index == 0) {
       Navigator.of(context).pushNamed(HomeScreen.route);
-    } else if (index == 2) {
+    } else if (index == 1) {
       Navigator.of(context).pushNamed(FavoriteScreen.route);
-    } else if (index == 3) {
+    } else if (index == 2) {
       Navigator.of(context).pushNamed(CartScreen.route);
     } else {
       Navigator.of(context).pushNamed(ProfileScreen.route);
