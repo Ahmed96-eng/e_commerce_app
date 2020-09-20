@@ -1,6 +1,5 @@
 import 'dart:async';
-
-import 'package:ecommerceapp/screens/bottom_bar_screen.dart';
+import 'package:ecommerceapp/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -17,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   route() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => BottomBarScreen()));
+        context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 
   @override

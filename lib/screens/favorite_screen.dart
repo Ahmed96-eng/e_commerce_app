@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
+import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/widget/favorite_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,7 @@ class FavoriteScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future<bool> _willPopScope() async {
-      Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+      Navigator.of(context).pop();
       return true;
     }
 
@@ -22,7 +23,7 @@ class FavoriteScreen extends StatelessWidget {
             leading: IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+                  Navigator.of(context).pop();
                 }),
           ),
           body: ListView.builder(
@@ -42,6 +43,7 @@ class FavoriteScreen extends StatelessWidget {
                   homrProvider.favoriteItems.values.toList()[index].quantity,
             ),
           ),
+          bottomNavigationBar: BottomNavBarWidget(),
         ),
       ),
     );

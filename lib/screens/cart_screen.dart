@@ -1,6 +1,7 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
 import 'package:ecommerceapp/screens/order_screen.dart';
+import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/widget/shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,7 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   Future<bool> _willPopScope() async {
-    Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+    Navigator.of(context).pop();
     return true;
   }
 
@@ -31,7 +32,7 @@ class _CartScreenState extends State<CartScreen> {
             leading: IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
-                  Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+                  Navigator.of(context).pop();
                 }),
           ),
           body: Column(
@@ -285,6 +286,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
             ],
           ),
+          bottomNavigationBar: BottomNavBarWidget(),
         ),
       ),
     );

@@ -3,10 +3,11 @@ import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
 import 'package:ecommerceapp/screens/order_screen.dart';
+import 'package:ecommerceapp/screens/profile_screen.dart';
 import 'package:ecommerceapp/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import './screens/bottom_bar_screen.dart';
+import 'widget/bottom_bar_widget.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,12 +30,13 @@ class MyApp extends StatelessWidget {
 //      home: HomeScreen(),
         initialRoute: '/',
         routes: {
-          '/': (context) => SplashScreen(),
-          BottomBarScreen.route: (context) => BottomBarScreen(),
+          '/': (context) => HomeScreen(),
+          // BottomNavBarWidget.route: (context) => BottomNavBarWidget(),
           FavoriteScreen.route: (context) => FavoriteScreen(),
           CartScreen.route: (context) => CartScreen(),
           OrderScreen.route: (context) => OrderScreen(),
           HomeScreen.route: (context) => HomeScreen(),
+          ProfileScreen.route: (context) => ProfileScreen(),
         },
       ),
     );

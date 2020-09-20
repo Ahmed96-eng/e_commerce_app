@@ -1,5 +1,5 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
-import 'package:ecommerceapp/screens/bottom_bar_screen.dart';
+import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
 import 'package:ecommerceapp/widget/order_item.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   Future<bool> _willPopScope() async {
-    Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+    Navigator.of(context).pop();
     return true;
   }
 
@@ -27,7 +27,7 @@ class _OrderScreenState extends State<OrderScreen> {
           leading: IconButton(
               icon: Icon(Icons.arrow_back),
               onPressed: () {
-                Navigator.of(context).pushReplacementNamed(HomeScreen.route);
+                Navigator.of(context).pop();
               }),
         ),
         body: Consumer<HomeProvider>(
@@ -37,6 +37,7 @@ class _OrderScreenState extends State<OrderScreen> {
             itemCount: homeProvider.orders.length,
           ),
         ),
+        bottomNavigationBar: BottomNavBarWidget(),
       ),
     );
   }
