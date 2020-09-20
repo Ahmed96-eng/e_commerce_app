@@ -19,31 +19,34 @@ class FavoriteScreen extends StatelessWidget {
     return Consumer<HomeProvider>(
       builder: (context, homrProvider, child) => WillPopScope(
         onWillPop: _willPopScope,
-        child: Scaffold(
-          appBar: appBarWidgit(
-              context,
-              'Favorite Screen',
-              homrProvider.favoriteCount.toString(),
-              homrProvider.cartCount.toString()),
-          body: ListView.builder(
-            itemCount: homrProvider.favoriteItems.length,
-            itemBuilder: (context, index) => FavoriteItem(
-              id: homrProvider.favoriteItems.values
-                  .toList()[index]
-                  .id
-                  .toString(),
-              productKey: homrProvider.favoriteItems.keys.toList()[index],
-              title: homrProvider.favoriteItems.values.toList()[index].title,
-              imageUrl:
-                  homrProvider.favoriteItems.values.toList()[index].imageUrl,
-              price: homrProvider.favoriteItems.values.toList()[index].price,
-              description:
-                  homrProvider.favoriteItems.values.toList()[index].description,
-              quantity:
-                  homrProvider.favoriteItems.values.toList()[index].quantity,
+        child: SafeArea(
+          child: Scaffold(
+            appBar: appBarWidgit(
+                context,
+                'Favorite Screen',
+                homrProvider.favoriteCount.toString(),
+                homrProvider.cartCount.toString()),
+            body: ListView.builder(
+              itemCount: homrProvider.favoriteItems.length,
+              itemBuilder: (context, index) => FavoriteItem(
+                id: homrProvider.favoriteItems.values
+                    .toList()[index]
+                    .id
+                    .toString(),
+                productKey: homrProvider.favoriteItems.keys.toList()[index],
+                title: homrProvider.favoriteItems.values.toList()[index].title,
+                imageUrl:
+                    homrProvider.favoriteItems.values.toList()[index].imageUrl,
+                price: homrProvider.favoriteItems.values.toList()[index].price,
+                description: homrProvider.favoriteItems.values
+                    .toList()[index]
+                    .description,
+                quantity:
+                    homrProvider.favoriteItems.values.toList()[index].quantity,
+              ),
             ),
+            // bottomNavigationBar: BottomNavBarWidget(),
           ),
-          // bottomNavigationBar: BottomNavBarWidget(),
         ),
       ),
     );
