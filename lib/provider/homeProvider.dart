@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/model/cart.dart';
+import 'package:ecommerceapp/model/category.dart';
 import 'package:ecommerceapp/model/favorite.dart';
 import 'package:ecommerceapp/model/order.dart';
 import 'package:ecommerceapp/model/product.dart';
@@ -107,10 +108,58 @@ class HomeProvider with ChangeNotifier {
       quantity: 1,
     ),
   ];
+
+  List<Category> _category = [
+    Category(
+      id: '1',
+      title: 'Snackers',
+      products: [
+        Product(
+          id: '1',
+          title: 'Snacker 1',
+          description: 'Snacker 1 description',
+          price: 25.99,
+          imageUrl:
+              'https://images-na.ssl-images-amazon.com/images/I/71oP3EMX4hL._UL1500_.jpg',
+          quantity: 1,
+        ),
+        Product(
+          id: '2',
+          title: 'Snacker 2',
+          description:
+              'Snacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
+          price: 50.99,
+          imageUrl:
+              'https://5.imimg.com/data5/GU/LY/MY-44393694/men-sneaker-shoes-500x500.jpg',
+          quantity: 1,
+        ),
+        Product(
+          id: '3',
+          title: 'Snacker 3',
+          description: 'Snacker 3 description',
+          price: 20.25,
+          imageUrl:
+              'https://images-na.ssl-images-amazon.com/images/I/71OCUKectKL._UX395_.jpg',
+          quantity: 1,
+        ),
+        Product(
+          id: '4',
+          title: 'Snacker 4',
+          description: 'Snacker 4 description',
+          price: 30.99,
+          imageUrl:
+              'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg',
+          quantity: 1,
+        ),
+      ],
+    ),
+  ];
+
   List<Product> get snackersItems => _snackersItems;
   List<Product> get watchItems => _watchItems;
   List<Product> get jacketItems => _jacketItems;
   List<Product> get shirtItems => _shirtItems;
+  List<Category> get category => _category;
 
   Map<String, Cart> _cartItems = {};
   Map<String, Cart> get cartItems => _cartItems;
@@ -167,7 +216,7 @@ class HomeProvider with ChangeNotifier {
   }
 
   void removeCartItem(String id) {
-    cartItems.remove(id);
+    _cartItems.remove(id);
     notifyListeners();
   }
 
