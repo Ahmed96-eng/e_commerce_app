@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-Widget customTabs({@required title, @required imageUrl}) {
+Widget customTabs(
+    {String id, @required String title, @required String imageUrl}) {
   return Container(
     padding: EdgeInsets.symmetric(horizontal: 8),
     // height: 35,

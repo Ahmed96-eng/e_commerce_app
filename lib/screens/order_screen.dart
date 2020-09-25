@@ -1,8 +1,5 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
-import 'package:ecommerceapp/screens/Snackers.dart';
 import 'package:ecommerceapp/widget/appBar_widget.dart';
-import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
-import 'package:ecommerceapp/screens/home_screen.dart';
 import 'package:ecommerceapp/widget/order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +30,7 @@ class _OrderScreenState extends State<OrderScreen> {
               'Order Screen',
               homeProvider.favoriteCount.toString(),
               homeProvider.cartCount.toString()),
-          drawer: Drawer(),
+          // drawer: Drawer(),
           body: ListView.builder(
             itemBuilder: (context, index) =>
                 OrderItem(homeProvider.orders[index]),

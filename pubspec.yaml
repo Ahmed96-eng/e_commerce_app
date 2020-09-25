@@ -27,6 +27,8 @@ dependencies:
   provider: ^4.3.2+2
   flutter_flexible_toast: ^0.1.4
   intl: ^0.16.1
+  shared_preferences:
+  localstorage:
 
 dev_dependencies:
   flutter_test:

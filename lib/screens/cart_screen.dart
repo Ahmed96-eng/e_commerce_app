@@ -67,19 +67,23 @@ class _CartScreenState extends State<CartScreen> {
                           softWrap: true,
                           overflow: TextOverflow.fade,
                           style: TextStyle(
-                              fontSize: 14, fontWeight: FontWeight.bold),
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: homrProvider.cartItems.length == 0
+                                  ? Colors.grey
+                                  : Colors.black),
                         ),
                         onPressed: () {
                           if (homrProvider.cartItems.length == 0 ||
                               homrProvider.cartItems.length == null) {
-                            return;
+                            return null;
                           }
                           homrProvider.addOrder(
                               homrProvider.cartItems.values.toList(),
                               homrProvider.totalAmount);
                           homrProvider.clearCart();
 
-                          Navigator.of(context).pushNamed(OrderScreen.route);
+                          Navigator.of(context).pop();
                         },
                       ),
                     ],

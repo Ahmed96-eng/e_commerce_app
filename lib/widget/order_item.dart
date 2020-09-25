@@ -28,10 +28,23 @@ class _OrderItemState extends State<OrderItem> {
                   "# ${widget.order.id.toString()}",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
-                subtitle: Text(
-                  DateFormat("yyyy/MM/dd   hh:mm")
-                      .format(widget.order.dateTime),
-                  style: TextStyle(fontSize: 15, color: Colors.black),
+                subtitle: Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        'TotalAmount: ${widget.order.amount} \$',
+                        style: TextStyle(fontSize: 16, color: Colors.black),
+                      ),
+                      Text(
+                        DateFormat("yyyy/MM/dd   hh:mm")
+                            .format(widget.order.dateTime),
+                        style: TextStyle(fontSize: 15, color: Colors.black),
+                      ),
+                    ],
+                  ),
                 ),
                 trailing: IconButton(
                     icon: _expand
@@ -52,7 +65,7 @@ class _OrderItemState extends State<OrderItem> {
                     color: Colors.redAccent.withOpacity(0.3),
                     padding: EdgeInsets.symmetric(horizontal: 15, vertical: 1),
                     height:
-                        min(widget.order.cartProducts.length * 20.0 + 25, 200),
+                        min(widget.order.cartProducts.length * 28.0 + 25, 200),
                     child: ListView(
                       children: widget.order.cartProducts
                           .map(

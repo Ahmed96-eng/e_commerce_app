@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
+import 'package:ecommerceapp/widget/shared_storage.dart';
 import 'package:ecommerceapp/widget/shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -8,25 +9,38 @@ class ProductDetails extends StatefulWidget {
   String title, imagUrl, id, description;
   double price;
   int quantity;
+  bool isFavorite;
   ProductDetails(
       {this.id,
       this.title,
       this.description,
       this.imagUrl,
       this.price,
-      this.quantity});
+      this.quantity,
+      this.isFavorite = false});
   @override
   _ProductDetailsState createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
   @override
+  // void initState() {
+  //   SharedStorage().getcheckFavoritePref(widget.id);
+
+  //   super.initState();
+  // }
+// this.props.navigation.state.params.refresh();
+  @override
   Widget build(BuildContext context) {
+    final homeProvider = Provider.of<HomeProvider>(context);
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
+            snap: false, stretch: true,
+            floating: true,
+            excludeHeaderSemantics: true,
             automaticallyImplyLeading: true,
             backgroundColor: Colors.redAccent.withOpacity(0.4),
             // title: Text(widget.title,
