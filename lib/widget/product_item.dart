@@ -1,5 +1,5 @@
 import 'package:ecommerceapp/model/product.dart';
-import 'package:ecommerceapp/provider/favoriteProvider.dart';
+
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/productDetails.dart';
 import 'package:ecommerceapp/widget/shared_storage.dart';
@@ -22,25 +22,22 @@ class ProductItem extends StatefulWidget {
   //   this.quantity,
   //   this.isFavorite,
   // });
-  int index;
+
   Product product;
-  ProductItem({this.product, this.index});
+  ProductItem({this.product});
   @override
   _ProductItemState createState() => _ProductItemState();
 }
 
 class _ProductItemState extends State<ProductItem> {
-  // final LocalStorage storageFavorite = LocalStorage('favorite');
-  bool _isFavorite = false;
   @override
   void initState() {
     super.initState();
-    SharedStorage().getcheckFavoritePref(widget.product.id);
+    // SharedStorage().getcheckFavoritePref(widget.product.id);
   }
 
   @override
   Widget build(BuildContext context) {
-    // bool _isFavorite = widget.isFavorite;
     final homeProvider = Provider.of<HomeProvider>(context);
     print('Product item widgit ----------');
     return Padding(
@@ -52,71 +49,59 @@ class _ProductItemState extends State<ProductItem> {
               width: 300,
               height: 300,
               child: GridTile(
-                header: ListTile(
-                  leading: IconButton(
-                      icon: Icon(
-                        _isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: _isFavorite ? Colors.red : Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isFavorite = !_isFavorite;
-                          if (_isFavorite) {
-                            homeProvider.addFavorite(
-                              widget.product.id,
-                              widget.product.title,
-                              widget.product.imageUrl,
-                              widget.product.description,
-                              widget.product.price,
-                              widget.product.isFavorite,
-                              widget.product.quantity,
-                            );
-                            // homeProvider.changeFavoriteValue(true);
-                            SharedStorage().setCheckFavoritePref(
-                                widget.product.id, _isFavorite);
-                          } else {
-                            homeProvider.removeFavorite(widget.product.id);
-                            // homeProvider.changeFavoriteValue(false);
-                            SharedStorage().setCheckFavoritePref(
-                                widget.product.id, _isFavorite);
-                          }
-                        });
-                      }),
+                header: Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: ListTile(
+                    leading: CircleAvatar(
+                      radius: MediaQuery.of(context).size.width * 0.06,
+                      backgroundColor: Colors.redAccent.withOpacity(0.3),
+                      child: IconButton(
+                          icon: Icon(
+                            widget.product.isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: widget.product.isFavorite
+                                ? Colors.red[500]
+                                : Colors.black,
+                            size: 26,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.product.isFavorite =
+                                  !widget.product.isFavorite;
+                              if (widget.product.isFavorite) {
+                                homeProvider.addFavorite(
+                                  widget.product.id,
+                                  widget.product.title,
+                                  widget.product.imageUrl,
+                                  widget.product.description,
+                                  widget.product.price,
+                                  widget.product.isFavorite,
+                                  widget.product.quantity,
+                                );
 
-                  // IconButton(
-                  //     icon: Icon(
-                  //       favoriteProvider.getFavorite
-                  //           ? Icons.favorite
-                  //           : Icons.favorite_border,
-                  //       color: Colors.red,
-                  //     ),
-                  //     onPressed: () {
-                  //       // setState(() {
-                  //       favoriteProvider.changeFavoriteValue(true);
-                  //       if (_isFavorite) {
-                  //         homeProvider.addFavorite(
-                  //             widget.id,
-                  //             widget.title,
-                  //             widget.imagUrl,
-                  //             widget.description,
-                  //             widget.price);
-                  //         SharedStorage()
-                  //             .setCheckFavoritePref(widget.id, true);
-                  //       } else {
-                  //         favoriteProvider.changeFavoriteValue(false);
-                  //         homeProvider.removeFavorite(widget.id);
-                  //         SharedStorage()
-                  //             .setCheckFavoritePref(widget.id, false);
-                  //       }
-                  //       // });
-                  //     }),
-                  // ),
-                  trailing: Container(
-                    padding: EdgeInsets.all(5),
-                    decoration: BoxDecoration(
-                      color: Colors.redAccent.withOpacity(0.4),
+                                // SharedStorage().setCheckFavoritePref(
+                                //     widget.product.id,
+                                //     widget.product.isFavorite);
+                              } else {
+                                homeProvider.removeFavorite(widget.product.id,
+                                    widget.product.isFavorite);
+
+                                // SharedStorage().setCheckFavoritePref(
+                                //     widget.product.id,
+                                //     widget.product.isFavorite);
+                              }
+                            });
+                          }),
                     ),
-                    child: Text("x ${widget.product.quantity.toString()}"),
+                    trailing: CircleAvatar(
+                      radius: MediaQuery.of(context).size.width * 0.06,
+                      backgroundColor: Colors.redAccent.withOpacity(0.3),
+                      child: Text(
+                        "x ${widget.product.quantity.toString()}",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                    ),
                   ),
                 ),
                 child: Image.network(

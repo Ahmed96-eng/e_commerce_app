@@ -1,4 +1,3 @@
-import 'package:ecommerceapp/provider/favoriteProvider.dart';
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
@@ -19,7 +18,6 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => HomeProvider()),
-        ChangeNotifierProvider(create: (_) => FavoriteProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

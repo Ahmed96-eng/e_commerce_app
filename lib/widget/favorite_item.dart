@@ -80,6 +80,13 @@ class FavoriteItem extends StatelessWidget {
                     ],
                   ),
                 ),
+                Spacer(),
+                // Consumer<HomeProvider>(
+                //     builder: (context, homeProvider, child) => IconButton(
+                //         icon: Icon(Icons.delete),
+                //         onPressed: () {
+                //           homeProvider.removeFavorite(id, false);
+                //         })),
               ],
             ),
           ),

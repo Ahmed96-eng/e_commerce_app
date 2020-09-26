@@ -14,7 +14,7 @@ class Product {
     this.imageUrl,
     this.price,
     this.quantity,
-    this.isFavorite,
+    this.isFavorite = false,
   });
 
   Product.fromjson(Map<String, dynamic> jsonObject) {

@@ -203,6 +203,7 @@ class HomeProvider with ChangeNotifier {
 
   void removeCartItem(String id) {
     cartItems.remove(id);
+    SharedWidget.showToastMsg('Delete from Cart Success ', time: 4);
     notifyListeners();
   }
 
@@ -232,11 +233,12 @@ class HomeProvider with ChangeNotifier {
             isFavorite: isFavorite),
       );
     }
+    // isFavorite = true;
     SharedWidget.showToastMsg('Add To Favorite Success ', time: 4);
     notifyListeners();
   }
 
-  void removeFavorite(String productId) {
+  void removeFavorite(String productId, bool isFavorite) {
     if (!_favoriteItems.containsKey(productId)) {
       return;
     }
@@ -255,6 +257,7 @@ class HomeProvider with ChangeNotifier {
     } else {
       _favoriteItems.remove(productId);
     }
+    // isFavorite = false;
     SharedWidget.showToastMsg('Delete From Favorite Success ', time: 4);
     notifyListeners();
   }

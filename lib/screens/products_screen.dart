@@ -92,7 +92,6 @@ class _ProductScreenState extends State<ProductScreen> {
                             // quantity: widget.product[index].quantity,
                             // isFavorite: widget.product[index].isFavorite,
                             product: widget.product[index],
-                            index: index,
                           ),
                           onTap: () {
                             SharedStorage()
