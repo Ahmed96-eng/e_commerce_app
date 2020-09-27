@@ -20,10 +20,10 @@ Widget customTabs(
               borderRadius: BorderRadius.all(Radius.circular(30.0)),
               color: Colors.redAccent,
             ),
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-            ),
+            // child: Image.network(
+            //   imageUrl,
+            //   fit: BoxFit.cover,
+            // ),
           ),
         ),
         Tab(

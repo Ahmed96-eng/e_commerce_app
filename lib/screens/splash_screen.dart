@@ -16,8 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   route() {
     Navigator.of(context).pushNamed(HomeScreen.route);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => HomeScreen()));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => HomeScreen()));
   }
 
   @override

@@ -32,9 +32,8 @@ class _ProductScreenState extends State<ProductScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('Product screen ----------');
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    // final width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -92,6 +91,7 @@ class _ProductScreenState extends State<ProductScreen> {
                             // quantity: widget.product[index].quantity,
                             // isFavorite: widget.product[index].isFavorite,
                             product: widget.product[index],
+                            // index: index,
                           ),
                           onTap: () {
                             SharedStorage()
@@ -101,17 +101,18 @@ class _ProductScreenState extends State<ProductScreen> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => ProductDetails(
-                                          id: widget.product[index].id,
-                                          title: widget.product[index].title,
-                                          imagUrl:
-                                              widget.product[index].imageUrl,
-                                          price: widget.product[index].price,
-                                          description:
-                                              widget.product[index].description,
-                                          quantity:
-                                              widget.product[index].quantity,
-                                          isFavorite:
-                                              widget.product[index].isFavorite,
+                                          // id: widget.product[index].id,
+                                          // title: widget.product[index].title,
+                                          // imagUrl:
+                                          //     widget.product[index].imageUrl,
+                                          // price: widget.product[index].price,
+                                          // description:
+                                          //     widget.product[index].description,
+                                          // quantity:
+                                          //     widget.product[index].quantity,
+                                          // isFavorite:
+                                          //     widget.product[index].isFavorite,
+                                          product: widget.product[index],
                                         )));
                           },
                         ),

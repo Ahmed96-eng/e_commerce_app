@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/model/favorite.dart';
 import 'package:ecommerceapp/model/product.dart';
 
 import 'package:ecommerceapp/provider/homeProvider.dart';
@@ -9,20 +10,6 @@ import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
 
 class ProductItem extends StatefulWidget {
-  // String title, imagUrl, id, description;
-  // double price;
-  // int quantity;
-  // bool isFavorite = false;
-  // ProductItem({
-  //   this.id,
-  //   this.title,
-  //   this.description,
-  //   this.imagUrl,
-  //   this.price,
-  //   this.quantity,
-  //   this.isFavorite,
-  // });
-
   Product product;
   ProductItem({this.product});
   @override
@@ -39,7 +26,7 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context);
-    print('Product item widgit ----------');
+
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 5),
         child: ClipRRect(
@@ -71,21 +58,16 @@ class _ProductItemState extends State<ProductItem> {
                                   !widget.product.isFavorite;
                               if (widget.product.isFavorite) {
                                 homeProvider.addFavorite(
-                                  widget.product.id,
-                                  widget.product.title,
-                                  widget.product.imageUrl,
-                                  widget.product.description,
-                                  widget.product.price,
-                                  widget.product.isFavorite,
-                                  widget.product.quantity,
+                                  widget.product,
                                 );
 
                                 // SharedStorage().setCheckFavoritePref(
                                 //     widget.product.id,
                                 //     widget.product.isFavorite);
                               } else {
-                                homeProvider.removeFavorite(widget.product.id,
-                                    widget.product.isFavorite);
+                                homeProvider.removeFavorite(
+                                  widget.product,
+                                );
 
                                 // SharedStorage().setCheckFavoritePref(
                                 //     widget.product.id,
@@ -105,9 +87,14 @@ class _ProductItemState extends State<ProductItem> {
                   ),
                 ),
                 child: Image.network(
-                  widget.product.imageUrl,
-                  fit: BoxFit.cover,
-                ),
+                      widget.product.imageUrl,
+                      fit: BoxFit.cover,
+                    ) ??
+                    Image.file(
+                      widget.product.file,
+                      fit: BoxFit.cover,
+                    ) ??
+                    '',
                 footer: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(

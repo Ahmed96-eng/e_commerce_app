@@ -1,26 +1,13 @@
+import 'package:ecommerceapp/model/favorite.dart';
+import 'package:ecommerceapp/model/product.dart';
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/productDetails.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FavoriteItem extends StatelessWidget {
-  String id;
-  String productKey;
-  String title;
-  String imageUrl;
-  String description;
-  double price;
-  int quantity;
-
-  FavoriteItem({
-    this.id,
-    this.productKey,
-    this.title,
-    this.imageUrl,
-    this.description,
-    this.price,
-    this.quantity,
-  });
+  Favorite favoriteProduct;
+  FavoriteItem({this.favoriteProduct});
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -31,18 +18,21 @@ class FavoriteItem extends StatelessWidget {
         borderRadius: BorderRadius.circular(15),
         child: InkWell(
           onTap: () {
-            print('ONTAPPED ${description.toString()}+2@');
-            print('ONTAPPED ${title.toString()}+2@');
+            // print('ONTAPPED ${product.description.toString()}+2@');
+            // print('ONTAPPED ${product.title.toString()}+2@');
             Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => ProductDetails(
-                          id: id.toString(),
-                          title: title,
-                          imagUrl: imageUrl,
-                          description: description ?? "",
-                          price: price,
-                          quantity: quantity,
+                          // id: favoriteProduct.product.id.toString(),
+                          // title: favoriteProduct.product.title,
+                          // imagUrl: favoriteProduct.product.imageUrl,
+                          // description:
+                          //     favoriteProduct.product.description ?? "",
+                          // price: favoriteProduct.product.price,
+                          // quantity: favoriteProduct.product.quantity,
+                          // isFavorite: favoriteProduct.product.isFavorite,
+                          product: favoriteProduct.product,
                         )));
           },
           child: Container(
@@ -55,7 +45,7 @@ class FavoriteItem extends StatelessWidget {
                   width: width * 0.3,
                   height: height * 0.2,
                   child: Image.network(
-                    imageUrl,
+                    favoriteProduct.product.imageUrl,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -67,13 +57,13 @@ class FavoriteItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        title,
+                        favoriteProduct.product.title,
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(height: 10),
                       Text(
-                        "\$ ${price.toString()}",
+                        "\$ ${favoriteProduct.product.price.toString()}",
                         style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.w500),
                       ),
@@ -81,12 +71,12 @@ class FavoriteItem extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                // Consumer<HomeProvider>(
-                //     builder: (context, homeProvider, child) => IconButton(
-                //         icon: Icon(Icons.delete),
-                //         onPressed: () {
-                //           homeProvider.removeFavorite(id, false);
-                //         })),
+                Consumer<HomeProvider>(
+                    builder: (context, homeProvider, child) => IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          homeProvider.removeFavorite(favoriteProduct.product);
+                        })),
               ],
             ),
           ),
