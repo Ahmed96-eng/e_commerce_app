@@ -9,10 +9,13 @@ import 'package:provider/provider.dart';
 
 class FavoriteScreen extends StatelessWidget {
   static const route = 'favorite_screen';
+  final pageIndex = 1;
   @override
   Widget build(BuildContext context) {
     Future<bool> _willPopScope() async {
-      Navigator.of(context).pop();
+      // Navigator.of(context).pop();
+      Navigator.of(context).pushNamed(HomeScreen.route);
+
       return true;
     }
 
@@ -28,22 +31,24 @@ class FavoriteScreen extends StatelessWidget {
           body: ListView.builder(
             itemCount: homrProvider.favoriteItems.length,
             itemBuilder: (context, index) => FavoriteItem(
-              id: homrProvider.favoriteItems.values
-                  .toList()[index]
-                  .id
-                  .toString(),
-              productKey: homrProvider.favoriteItems.keys.toList()[index],
-              title: homrProvider.favoriteItems.values.toList()[index].title,
-              imageUrl:
-                  homrProvider.favoriteItems.values.toList()[index].imageUrl,
-              price: homrProvider.favoriteItems.values.toList()[index].price,
-              description:
-                  homrProvider.favoriteItems.values.toList()[index].description,
-              quantity:
-                  homrProvider.favoriteItems.values.toList()[index].quantity,
+              // id: homrProvider.favoriteItems.values
+              //     .toList()[index]
+              //     .id
+              //     .toString(),
+              // productKey: homrProvider.favoriteItems.keys.toList()[index],
+              // title: homrProvider.favoriteItems.values.toList()[index].title,
+              // imageUrl:
+              //     homrProvider.favoriteItems.values.toList()[index].imageUrl,
+              // price: homrProvider.favoriteItems.values.toList()[index].price,
+              // description:
+              //     homrProvider.favoriteItems.values.toList()[index].description,
+              // quantity:
+              //     homrProvider.favoriteItems.values.toList()[index].quantity,
+              favoriteProduct:
+                  homrProvider.favoriteItems.values.toList()[index],
             ),
           ),
-          // bottomNavigationBar: BottomNavBarWidget(),
+          // bottomNavigationBar: BottomNavBarWidget(pageIndex: pageIndex),
         ),
       ),
     );

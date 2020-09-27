@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:ecommerceapp/model/cart.dart';
 import 'package:ecommerceapp/model/category.dart';
 import 'package:ecommerceapp/model/favorite.dart';
@@ -12,49 +15,53 @@ class HomeProvider with ChangeNotifier {
       id: '1',
       title: 'Snackers',
       imageUrl:
-          'https://images-na.ssl-images-amazon.com/images/I/71oP3EMX4hL._UL1500_.jpg',
+          'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg',
       products: [
-        Product(
-          id: '1',
-          title: 'Snacker 1',
-          description: 'Snacker 1 description',
-          price: 25.99,
-          imageUrl:
-              'https://images-na.ssl-images-amazon.com/images/I/71oP3EMX4hL._UL1500_.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
-        Product(
-          id: '2',
-          title: 'Snacker 2',
-          description:
-              'Snacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
-          price: 50.99,
-          imageUrl:
-              'https://5.imimg.com/data5/GU/LY/MY-44393694/men-sneaker-shoes-500x500.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
-        Product(
-          id: '3',
-          title: 'Snacker 3',
-          description: 'Snacker 3 description',
-          price: 20.25,
-          imageUrl:
-              'https://images-na.ssl-images-amazon.com/images/I/71OCUKectKL._UX395_.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
-        Product(
-          id: '4',
-          title: 'Snacker 4',
-          description: 'Snacker 4 description',
-          price: 30.99,
-          imageUrl:
-              'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
+        // Product(
+        //   id: '1',
+        //   title: 'Snacker 1',
+        //   description: 'Snacker 1 description',
+        //   price: 25.99,
+        //   imageUrl:
+        //       'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'snacker',
+        // ),
+        // Product(
+        //   id: '2',
+        //   title: 'Snacker 2',
+        //   description:
+        //       'Snacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
+        //   price: 50.99,
+        //   imageUrl:
+        //       'https://5.imimg.com/data5/GU/LY/MY-44393694/men-sneaker-shoes-500x500.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'snacker',
+        // ),
+        // Product(
+        //   id: '3',
+        //   title: 'Snacker 3',
+        //   description: 'Snacker 3 description',
+        //   price: 20.25,
+        //   imageUrl:
+        //       'https://images-na.ssl-images-amazon.com/images/I/71OCUKectKL._UX395_.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'snacker',
+        // ),
+        // Product(
+        //   id: '4',
+        //   title: 'Snacker 4',
+        //   description: 'Snacker 4 description',
+        //   price: 30.99,
+        //   imageUrl:
+        //       'https://images-na.ssl-images-amazon.com/images/I/71oP3EMX4hL._UL1500_.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'snacker',
+        // ),
       ],
     ),
     Category(
@@ -62,26 +69,28 @@ class HomeProvider with ChangeNotifier {
       title: 'Watch',
       imageUrl: 'https://www.amazon.in/images/I/61WixzlVuXL.jpg',
       products: [
-        Product(
-          id: '30',
-          title: 'Watch 1',
-          description: 'Watch 1 description',
-          price: 25.99,
-          imageUrl: 'https://www.amazon.in/images/I/61WixzlVuXL.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
-        Product(
-          id: '34',
-          title: 'Watch 2',
-          description:
-              'Watch 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
-          price: 25.99,
-          imageUrl:
-              'https://www.ablogtowatch.com/wp-content/uploads/2019/09/eBay-Omega-2.jpeg',
-          quantity: 1,
-          isFavorite: false,
-        ),
+        // Product(
+        //   id: '30',
+        //   title: 'Watch 1',
+        //   description: 'Watch 1 description',
+        //   price: 25.99,
+        //   imageUrl: 'https://www.amazon.in/images/I/61WixzlVuXL.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'watch',
+        // ),
+        // Product(
+        //   id: '34',
+        //   title: 'Watch 2',
+        //   description:
+        //       'Watch 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
+        //   price: 25.99,
+        //   imageUrl:
+        //       'https://www.ablogtowatch.com/wp-content/uploads/2019/09/eBay-Omega-2.jpeg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'watch',
+        // ),
       ],
     ),
     Category(
@@ -90,27 +99,29 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://cdn-images.farfetch-contents.com/14/70/76/45/14707645_25035903_600.jpg',
       products: [
-        Product(
-          id: '12',
-          title: 'Jacket 1',
-          description: 'Jacket 1 description',
-          price: 25.99,
-          imageUrl:
-              'https://cdn-images.farfetch-contents.com/14/70/76/45/14707645_25035903_600.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
-        Product(
-          id: '41',
-          title: 'Jacket 2',
-          description:
-              'Jacket 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
-          price: 25.99,
-          imageUrl:
-              'https://cf5.s3.souqcdn.com/item/2019/12/12/94/96/25/28/item_XL_94962528_f6d4794cb507c.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
+        // Product(
+        //   id: '12',
+        //   title: 'Jacket 1',
+        //   description: 'Jacket 1 description',
+        //   price: 25.99,
+        //   imageUrl:
+        //       'https://cdn-images.farfetch-contents.com/14/70/76/45/14707645_25035903_600.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'jacket',
+        // ),
+        // Product(
+        //   id: '41',
+        //   title: 'Jacket 2',
+        //   description:
+        //       'Jacket 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
+        //   price: 25.99,
+        //   imageUrl:
+        //       'https://cf5.s3.souqcdn.com/item/2019/12/12/94/96/25/28/item_XL_94962528_f6d4794cb507c.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'jacket',
+        // ),
       ],
     ),
     Category(
@@ -119,32 +130,37 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://lcw.akinoncdn.com/products/2020/03/10/1525250/354b1db1-b122-4130-8cea-2ee8d01d6eac_size561x730.jpg',
       products: [
-        Product(
-          id: '15',
-          title: 'Shirt 1',
-          description: 'Shirt 1 description',
-          price: 25.99,
-          imageUrl:
-              'https://lcw.akinoncdn.com/products/2020/03/10/1525250/354b1db1-b122-4130-8cea-2ee8d01d6eac_size561x730.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
-        Product(
-          id: '25',
-          title: 'Shirt 2',
-          description:
-              'Shirt 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
-          price: 25.99,
-          imageUrl:
-              'https://lcw.akinoncdn.com/products/2020/02/26/1208380/b569b97a-1f1d-4a37-8045-b317066674fb_size561x730.jpg',
-          quantity: 1,
-          isFavorite: false,
-        ),
+        // Product(
+        //   id: '15',
+        //   title: 'Shirt 1',
+        //   description: 'Shirt 1 description',
+        //   price: 25.99,
+        //   imageUrl:
+        //       'https://lcw.akinoncdn.com/products/2020/03/10/1525250/354b1db1-b122-4130-8cea-2ee8d01d6eac_size561x730.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'shirt',
+        // ),
+        // Product(
+        //   id: '25',
+        //   title: 'Shirt 2',
+        //   description:
+        //       'Shirt 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 descriptionSnacker 2 description',
+        //   price: 25.99,
+        //   imageUrl:
+        //       'https://lcw.akinoncdn.com/products/2020/02/26/1208380/b569b97a-1f1d-4a37-8045-b317066674fb_size561x730.jpg',
+        //   quantity: 1,
+        //   isFavorite: false,
+        //   category: 'shirt',
+        // ),
       ],
     ),
   ];
 
   List<Category> get category => _category;
+
+  List<Product> _products = [];
+  List<Product> get products => _products;
 
   Map<String, Cart> _cartItems = {};
   Map<String, Cart> get cartItems => _cartItems;
@@ -155,6 +171,78 @@ class HomeProvider with ChangeNotifier {
   List<Order> _orders = [];
   List<Order> get orders => _orders;
 
+  void addProduct({Product product}) {
+    try {
+      Product newProduct = Product(
+        id: DateTime.now().toString(),
+        title: product.title,
+        imageUrl: product.imageUrl,
+        description: product.description,
+        price: product.price,
+        quantity: product.quantity,
+        isFavorite: product.isFavorite,
+        category: product.category,
+        // file: product.file,
+      );
+      _products.add(newProduct);
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
+
+  void addProduct1({
+    String id,
+    String title,
+    String description,
+    String category,
+    String image,
+    // File file,
+    int quantity,
+    double price,
+  }) {
+    try {
+      // String base64Image =
+      //     "data:image/png;base64," + base64.encode(file.readAsBytesSync());
+      // print("mmmxxxxxxxcccccccccvvvvvvvvvvvvm" + base64Image);
+      // Category newProduct = Category(products: [
+      Product newProduct = Product(
+        id: DateTime.now().toString(),
+        title: title,
+        // imageUrl: base64Image ?? "",
+        imageUrl: image ?? "",
+        description: description,
+        price: price,
+        quantity: quantity,
+
+        category: category,
+        // file: file,
+      );
+      // ]);
+      _category.add(Category(title: category, products: [newProduct]));
+      notifyListeners();
+    } catch (error) {
+      print(error);
+      throw error;
+    }
+  }
+
+  void updataProduct(String id, Product editProduct) {
+    final prodIndex = _category.indexWhere((prod) => prod.id == id);
+    if (prodIndex >= 0) {
+      _products[prodIndex] = editProduct;
+      notifyListeners();
+    } else {
+      print('...');
+    }
+  }
+
+  void deleteProduct(String id) {
+    _products.removeWhere((prod) => prod.id == id);
+    notifyListeners();
+  }
+
   int get cartCount {
     return _cartItems.length;
   }
@@ -163,42 +251,39 @@ class HomeProvider with ChangeNotifier {
     return _favoriteItems.length;
   }
 
-  double get totalAmount {
-    var total = 0.0;
-    _cartItems.forEach(
-      (key, cartItem) {
-        total += cartItem.price * cartItem.quantity;
-      },
-    );
-    return total;
-  }
-
-  void addCart(String productId, String title, double price, String imageUrl,
-      String description, int quantity) {
-    if (_cartItems.containsKey(productId)) {
+  void addCart(
+      // String productId, String title, double price, String imageUrl,
+      //   String description, int quantity
+      Product products) {
+    if (_cartItems.containsKey(products.id)) {
       _cartItems.update(
-          productId,
+          products.id,
           (existingCartItem) => Cart(
-              id: existingCartItem.id,
-              title: existingCartItem.title,
-              imageUrl: existingCartItem.imageUrl,
-              price: existingCartItem.price,
-              description: existingCartItem.description,
-              quantity: existingCartItem.quantity + quantity));
+              // id: existingCartItem.id,
+              // title: existingCartItem.title,
+              // imageUrl: existingCartItem.imageUrl,
+              // price: existingCartItem.price,
+              // description: existingCartItem.description,
+              // quantity: existingCartItem.quantity + quantity,
+              product: existingCartItem.product));
     } else {
       _cartItems.putIfAbsent(
-        productId,
+        products.id,
         () => Cart(
-            id: DateTime.now().toString(),
-            title: title,
-            imageUrl: imageUrl,
-            price: price,
-            description: description,
-            quantity: quantity),
+          // id: DateTime.now().toString(),
+          // title: title,
+          // imageUrl: imageUrl,
+          // price: price,
+          // description: description,
+          // quantity: quantity,
+          product: products,
+        ),
       );
     }
+
     SharedWidget.showToastMsg('Add To Cart Success ', time: 4);
     notifyListeners();
+    products.quantity = 1;
   }
 
   void removeCartItem(String id) {
@@ -207,30 +292,37 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void addFavorite(String productId, String title, String imageUrl,
-      String description, double price, bool isFavorite, int quantity) {
-    if (_favoriteItems.containsKey(productId)) {
+  void addFavorite(
+      // String productId, String title, String imageUrl,
+      //   String description, double price, bool isFavorite, int quantity,
+      Product products) {
+    if (_favoriteItems.containsKey(products.id)) {
       _favoriteItems.update(
-          productId,
-          (existingFavoriteItem) => Favorite(
-              id: existingFavoriteItem.id,
-              title: existingFavoriteItem.title,
-              imageUrl: existingFavoriteItem.imageUrl,
-              description: existingFavoriteItem.description,
-              price: existingFavoriteItem.price,
-              quantity: existingFavoriteItem.quantity + 1,
-              isFavorite: existingFavoriteItem.isFavorite));
+        products.id,
+        (existingFavoriteItem) => Favorite(
+          // id: existingFavoriteItem.id,
+          // title: existingFavoriteItem.title,
+          // imageUrl: existingFavoriteItem.imageUrl,
+          // description: existingFavoriteItem.description,
+          // price: existingFavoriteItem.price,
+          // quantity: existingFavoriteItem.quantity + 1,
+          // isFavorite: existingFavoriteItem.isFavorite),
+          product: existingFavoriteItem.product,
+        ),
+      );
     } else {
       _favoriteItems.putIfAbsent(
-        productId,
+        products.id,
         () => Favorite(
-            id: productId,
-            title: title,
-            imageUrl: imageUrl,
-            description: description,
-            price: price,
-            quantity: 1,
-            isFavorite: isFavorite),
+          // id: productId,
+          // title: title,
+          // imageUrl: imageUrl,
+          // description: description,
+          // price: price,
+          // quantity: 1,
+          // isFavorite: isFavorite,
+          product: products,
+        ),
       );
     }
     // isFavorite = true;
@@ -238,28 +330,40 @@ class HomeProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void removeFavorite(String productId, bool isFavorite) {
-    if (!_favoriteItems.containsKey(productId)) {
+  void removeFavorite(Product products) {
+    if (!_favoriteItems.containsKey(products.id)) {
       return;
     }
-    if (_favoriteItems[productId].quantity > 1) {
+    if (_favoriteItems[products.id].product.quantity > 1) {
       _favoriteItems.update(
-        productId,
+        products.id,
         (existingFavoriteItem) => Favorite(
-          id: existingFavoriteItem.id,
-          title: existingFavoriteItem.title,
-          price: existingFavoriteItem.price,
-          imageUrl: existingFavoriteItem.imageUrl,
-          description: existingFavoriteItem.description,
-          quantity: existingFavoriteItem.quantity - 1,
+          // id: existingFavoriteItem.id,
+          // title: existingFavoriteItem.title,
+          // price: existingFavoriteItem.price,
+          // imageUrl: existingFavoriteItem.imageUrl,
+          // description: existingFavoriteItem.description,
+          // quantity: existingFavoriteItem.quantity - 1,
+          product: existingFavoriteItem.product,
         ),
       );
     } else {
-      _favoriteItems.remove(productId);
+      _favoriteItems.remove(products.id);
     }
-    // isFavorite = false;
+    products.isFavorite = false;
     SharedWidget.showToastMsg('Delete From Favorite Success ', time: 4);
     notifyListeners();
+  }
+
+  double get totalAmount {
+    var total = 0.0;
+    _cartItems.forEach(
+      (key, cartItem) {
+        total += cartItem.product.price * cartItem.product.quantity;
+        notifyListeners();
+      },
+    );
+    return total;
   }
 
   double totalProductPrice(double price, int quantity) {

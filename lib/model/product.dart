@@ -1,3 +1,5 @@
+import 'dart:io';
+
 class Product {
   String id;
   String title;
@@ -6,6 +8,8 @@ class Product {
   double price;
   int quantity;
   bool isFavorite;
+  String category;
+  File file;
 
   Product({
     this.id,
@@ -15,6 +19,8 @@ class Product {
     this.price,
     this.quantity,
     this.isFavorite = false,
+    this.category,
+    this.file,
   });
 
   Product.fromjson(Map<String, dynamic> jsonObject) {

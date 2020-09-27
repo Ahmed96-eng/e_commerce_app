@@ -3,6 +3,7 @@ import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
 import 'package:ecommerceapp/screens/order_screen.dart';
+import 'package:ecommerceapp/screens/product_dashboard_screen.dart';
 import 'package:flutter/material.dart';
 
 class DrawerWidget extends StatelessWidget {
@@ -46,6 +47,11 @@ class DrawerWidget extends StatelessWidget {
                 title: 'Favorite Screen',
                 icon: Icons.favorite_border,
                 page: FavoriteScreen(),
+              ),
+              ListTileWidget(
+                title: 'DashBoard Screen',
+                icon: Icons.favorite_border,
+                page: ProductDashBoardScreen(),
               ),
             ],
           ),

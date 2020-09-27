@@ -29,6 +29,7 @@ dependencies:
   intl: ^0.16.1
   shared_preferences:
   localstorage:
+  image_picker: ^0.6.7+4
 
 dev_dependencies:
   flutter_test:

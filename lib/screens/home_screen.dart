@@ -1,9 +1,12 @@
 import 'dart:io';
 import 'package:ecommerceapp/provider/homeProvider.dart';
+import 'package:ecommerceapp/screens/product_dashboard_screen.dart';
 import 'package:ecommerceapp/screens/products_screen.dart';
 import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
+import 'package:ecommerceapp/screens/profile_screen.dart';
 import 'package:ecommerceapp/widget/badge.dart';
+import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/widget/custom_tabs.dart';
 import 'package:ecommerceapp/widget/drawer_widget.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +14,7 @@ import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   static const route = 'home_screen';
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -69,7 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    print('Home  screen ----------');
     final homeProvider = Provider.of<HomeProvider>(context);
     return DefaultTabController(
       length: homeProvider.category.length,
@@ -134,8 +137,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         product: value.products,
                       ))
                   .toList()),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.black54,
+            child: Icon(Icons.add),
+            tooltip: 'Add',
+            onPressed: () {
+              Navigator.of(context).pushNamed(ProductDashBoardScreen.route);
+            },
+          ),
         ),
       ),
     );
   }
 }
+// IconButton(
+//               icon: Icon(Icons.add),
+//               onPressed: () {
+//                 Navigator.of(context).pushNamed(ProductDashBoardScreen.route);
+//               }),

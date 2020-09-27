@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/widget/appBar_widget.dart';
+import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/widget/order_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,8 +37,8 @@ class _OrderScreenState extends State<OrderScreen> {
                 OrderItem(homeProvider.orders[index]),
             itemCount: homeProvider.orders.length,
           ),
+          // bottomNavigationBar: BottomNavBarWidget(),
         ),
-        // bottomNavigationBar: BottomNavBarWidget(),
       ),
     );
   }
