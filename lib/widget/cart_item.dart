@@ -123,7 +123,7 @@ class _CartItemState extends State<CartItem> {
             },
             child: Container(
               height: height * 0.2,
-              color: Colors.red[50],
+              color: Colors.grey.withOpacity(0.1),
               // margin: EdgeInsets.all(8),
               child: Row(
                 children: [

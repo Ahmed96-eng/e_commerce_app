@@ -20,6 +20,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  String categoryName = 'snacker';
   Future<bool> _onWillPop() async {
     return (await showDialog(
           context: context,
@@ -74,77 +75,69 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context);
-    return DefaultTabController(
-      length: homeProvider.category.length,
-      child: WillPopScope(
-        onWillPop: _onWillPop,
-        child: Scaffold(
-          drawer: DrawerWidget(),
-          appBar: AppBar(
-            title: Text('My Shop'),
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(100),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: TabBar(
-                      labelColor: Colors.redAccent.withOpacity(0.9),
-                      indicatorPadding: EdgeInsets.only(bottom: -5),
-                      isScrollable: true,
-                      unselectedLabelColor: Colors.black,
-                      indicatorColor: Colors.redAccent.withOpacity(0.9),
-                      tabs: homeProvider.category
-                          .map((value) => customTabs(
-                              id: value.id,
-                              title: value.title,
-                              imageUrl: value.imageUrl))
-                          .toList(),
-                    ),
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        drawer: DrawerWidget(),
+        appBar: AppBar(
+          title: Text('My Shop'),
+          bottom: PreferredSize(
+            preferredSize: Size.fromHeight(100),
+            child: Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: homeProvider.categories.length,
+                itemBuilder: (context, index) => InkWell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: customTabs(
+                        title: homeProvider.categories[index],
+                        imageUrl: homeProvider.imageCategories[index]),
                   ),
-                ],
+                  onTap: () {
+                    setState(() {
+                      categoryName = homeProvider.categories[index];
+                    });
+                  },
+                ),
               ),
             ),
-            actions: [
-              Badge(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.favorite,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(FavoriteScreen.route);
-                  },
-                ),
-                value: homeProvider.favoriteCount.toString(),
-              ),
-              Badge(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.shopping_cart,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(CartScreen.route);
-                  },
-                ),
-                value: homeProvider.cartCount.toString(),
-              ),
-            ],
           ),
-          body: TabBarView(
-              physics: ScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-              children: homeProvider.category
-                  .map((value) => ProductScreen(
-                        product: value.products,
-                      ))
-                  .toList()),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.black54,
-            child: Icon(Icons.add),
-            tooltip: 'Add',
-            onPressed: () {
-              Navigator.of(context).pushNamed(ProductDashBoardScreen.route);
-            },
-          ),
+          actions: [
+            Badge(
+              child: IconButton(
+                icon: Icon(
+                  Icons.favorite,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(FavoriteScreen.route);
+                },
+              ),
+              value: homeProvider.favoriteCount.toString(),
+            ),
+            Badge(
+              child: IconButton(
+                icon: Icon(
+                  Icons.shopping_cart,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(CartScreen.route);
+                },
+              ),
+              value: homeProvider.cartCount.toString(),
+            ),
+          ],
+        ),
+        body: ProductScreen(
+          product: homeProvider.productCategory(categoryName),
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.black54,
+          child: Icon(Icons.add),
+          tooltip: 'Add',
+          onPressed: () {
+            Navigator.of(context).pushNamed(ProductDashBoardScreen.route);
+          },
         ),
       ),
     );

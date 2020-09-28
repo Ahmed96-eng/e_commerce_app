@@ -37,7 +37,7 @@ class FavoriteItem extends StatelessWidget {
           },
           child: Container(
             height: height * 0.15,
-            color: Colors.red[50],
+            color: Colors.grey.withOpacity(0.1),
             // margin: EdgeInsets.all(8),
             child: Row(
               children: [
@@ -51,7 +51,7 @@ class FavoriteItem extends StatelessWidget {
                 ),
                 SizedBox(width: 16),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +73,10 @@ class FavoriteItem extends StatelessWidget {
                 Spacer(),
                 Consumer<HomeProvider>(
                     builder: (context, homeProvider, child) => IconButton(
-                        icon: Icon(Icons.delete),
+                        icon: Icon(
+                          Icons.delete,
+                          size: 35,
+                        ),
                         onPressed: () {
                           homeProvider.removeFavorite(favoriteProduct.product);
                         })),

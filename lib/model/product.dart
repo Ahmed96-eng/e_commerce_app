@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
+
 class Product {
   String id;
   String title;
@@ -9,6 +11,7 @@ class Product {
   int quantity;
   bool isFavorite;
   String category;
+  String imageCategory;
   File file;
 
   Product({
@@ -20,6 +23,7 @@ class Product {
     this.quantity,
     this.isFavorite = false,
     this.category,
+    this.imageCategory,
     this.file,
   });
 

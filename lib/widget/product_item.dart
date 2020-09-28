@@ -41,7 +41,7 @@ class _ProductItemState extends State<ProductItem> {
                   child: ListTile(
                     leading: CircleAvatar(
                       radius: MediaQuery.of(context).size.width * 0.06,
-                      backgroundColor: Colors.redAccent.withOpacity(0.3),
+                      backgroundColor: Colors.grey.withOpacity(0.6),
                       child: IconButton(
                           icon: Icon(
                             widget.product.isFavorite
@@ -78,7 +78,7 @@ class _ProductItemState extends State<ProductItem> {
                     ),
                     trailing: CircleAvatar(
                       radius: MediaQuery.of(context).size.width * 0.06,
-                      backgroundColor: Colors.redAccent.withOpacity(0.3),
+                      backgroundColor: Colors.grey.withOpacity(0.6),
                       child: Text(
                         "x ${widget.product.quantity.toString()}",
                         style: TextStyle(color: Colors.black),
@@ -86,19 +86,29 @@ class _ProductItemState extends State<ProductItem> {
                     ),
                   ),
                 ),
-                child: Image.network(
-                      widget.product.imageUrl,
-                      fit: BoxFit.cover,
-                    ) ??
-                    Image.file(
-                      widget.product.file,
-                      fit: BoxFit.cover,
-                    ) ??
-                    '',
+                child:
+                    //  Container(
+                    //     width: MediaQuery.of(context).size.width,
+                    //     height: 100,
+                    //     decoration: BoxDecoration(
+                    //         image: DecorationImage(
+                    //             image: NetworkImage(
+                    //               widget.product.imageUrl,
+                    //             ),
+                    //             fit: BoxFit.cover))),
+                    widget.product.file != null
+                        ? Image.file(
+                            widget.product.file,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            widget.product.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
                 footer: Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                    color: Colors.redAccent.withOpacity(0.4),
+                    color: Colors.grey.withOpacity(0.6),
                   ),
                   child: ListTile(
                     title: Text(

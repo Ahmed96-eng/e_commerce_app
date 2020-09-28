@@ -30,7 +30,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
   final _quantityFoucsNode = FocusNode();
 
   var productDate = Product(
-    id: '',
+    id: DateTime.now().toIso8601String(),
     title: '',
     description: '',
     price: 0,
@@ -81,6 +81,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                         setState(() {
                           _file = File(file.path);
                           productDate.imageUrl = _file.toString();
+                          productDate.file = _file;
                         });
                         Navigator.of(context).pop();
                       },
@@ -94,6 +95,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                         setState(() {
                           _file = File(file.path);
                           productDate.imageUrl = _file.toString();
+                          productDate.file = _file;
                         });
                         Navigator.of(context).pop();
                       },
@@ -102,6 +104,17 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                 ),
               ));
         });
+  }
+
+  List<DropdownMenuItem> itemsConvert(List<String> items) {
+    List<DropdownMenuItem> dropItems = [];
+    for (int i = 0; i < items.length; i++) {
+      dropItems.add(DropdownMenuItem(
+        child: Text(items[i]),
+        value: items[i],
+      ));
+    }
+    return dropItems;
   }
 
   @override
@@ -217,12 +230,14 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                   padding: const EdgeInsets.only(top: 20, bottom: 20),
                   child: DropdownButtonHideUnderline(
                       child: DropdownButtonFormField(
-                    items: homeProvider.category
-                        .map((value) => DropdownMenuItem(
-                              child: Text(value.title),
-                              value: value.title,
+                    // items: itemsConvert(homeProvider.categories),
+                    items: homeProvider.categories
+                        .map((category) => DropdownMenuItem(
+                              value: category,
+                              child: Text(category),
                             ))
                         .toList(),
+
                     isExpanded: true,
                     decoration: InputDecoration(
                         labelText: 'Category', hintText: 'Category'),
@@ -404,10 +419,10 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                     _form.currentState.validate();
                     _form.currentState.save();
                     homeProvider.addProduct1(
-                      id: productDate.id,
+                      // id: productDate.id,
                       title: productDate.title,
                       description: _descriptionControler.text,
-                      // file: _file,
+                      file: _file,
                       image: productDate.imageUrl ?? "",
                       price: productDate.price,
                       quantity: productDate.quantity,

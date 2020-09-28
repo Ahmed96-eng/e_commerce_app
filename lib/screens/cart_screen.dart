@@ -44,7 +44,7 @@ class _CartScreenState extends State<CartScreen> {
         body: Column(
           children: [
             Card(
-              color: Colors.red[100],
+              color: Colors.grey.withOpacity(0.1),
               margin: EdgeInsets.all(10.0),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),

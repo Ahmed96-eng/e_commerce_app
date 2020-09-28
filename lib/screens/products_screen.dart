@@ -42,8 +42,10 @@ class _ProductScreenState extends State<ProductScreen> {
             child: Container(
                 height: height * 0.07,
                 decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.3),
-                    border: Border.all(color: Colors.redAccent),
+                    color: Colors.grey.withOpacity(0.1),
+                    border: Border.all(
+                      color: Colors.grey[800],
+                    ),
                     borderRadius: BorderRadius.circular(20)),
                 child: TextField(
                   controller: searchCont,
