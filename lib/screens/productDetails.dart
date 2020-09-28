@@ -61,10 +61,19 @@ class _ProductDetailsState extends State<ProductDetails> {
             pinned: true,
             expandedHeight: height * 0.5,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.network(
-                widget.product.imageUrl ?? "",
-                fit: BoxFit.cover,
-              ),
+              background: widget.product.file != null
+                  ? Image.file(
+                      widget.product.file,
+                      fit: BoxFit.cover,
+                    )
+                  : Image.network(
+                      widget.product.imageUrl,
+                      fit: BoxFit.cover,
+                    ),
+              // Image.network(
+              //   widget.product.imageUrl ?? "",
+              //   fit: BoxFit.cover,
+              // ),
             ),
             actions: [
               Badge(
