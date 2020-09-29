@@ -175,6 +175,7 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://images-na.ssl-images-amazon.com/images/I/611TWd7sDIL._UY500_.jpg',
       quantity: 1,
+      stockQuantity: 5,
       isFavorite: false,
       category: 'snacker',
       file: null,
@@ -190,6 +191,7 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://5.imimg.com/data5/GU/LY/MY-44393694/men-sneaker-shoes-500x500.jpg',
       quantity: 1,
+      stockQuantity: 15,
       isFavorite: false,
       category: 'snacker',
       file: null,
@@ -204,6 +206,7 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://images-na.ssl-images-amazon.com/images/I/71OCUKectKL._UX395_.jpg',
       quantity: 1,
+      stockQuantity: 3,
       isFavorite: false,
       category: 'snacker',
       file: null,
@@ -218,6 +221,7 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://images-na.ssl-images-amazon.com/images/I/71oP3EMX4hL._UL1500_.jpg',
       quantity: 1,
+      stockQuantity: 1,
       isFavorite: false,
       category: 'snacker',
       file: null,
@@ -232,6 +236,7 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://lcw.akinoncdn.com/products/2020/03/10/1525250/354b1db1-b122-4130-8cea-2ee8d01d6eac_size561x730.jpg',
       quantity: 1,
+      stockQuantity: 4,
       isFavorite: false,
       category: 'shirt',
       file: null,
@@ -247,6 +252,7 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://lcw.akinoncdn.com/products/2020/02/26/1208380/b569b97a-1f1d-4a37-8045-b317066674fb_size561x730.jpg',
       quantity: 1,
+      stockQuantity: 9,
       isFavorite: false,
       category: 'shirt',
       file: null,
@@ -261,6 +267,7 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://cdn-images.farfetch-contents.com/14/70/76/45/14707645_25035903_600.jpg',
       quantity: 1,
+      stockQuantity: 12,
       isFavorite: false,
       category: 'jacket',
       file: null,
@@ -276,6 +283,7 @@ class HomeProvider with ChangeNotifier {
       imageUrl:
           'https://cf5.s3.souqcdn.com/item/2019/12/12/94/96/25/28/item_XL_94962528_f6d4794cb507c.jpg',
       quantity: 1,
+      stockQuantity: 10,
       isFavorite: false,
       category: 'jacket',
       file: null,
@@ -289,6 +297,7 @@ class HomeProvider with ChangeNotifier {
       price: 25.99,
       imageUrl: 'https://www.amazon.in/images/I/61WixzlVuXL.jpg',
       quantity: 1,
+      stockQuantity: 7,
       isFavorite: false,
       category: 'watch',
       file: null,
@@ -302,7 +311,8 @@ class HomeProvider with ChangeNotifier {
       price: 25.99,
       imageUrl:
           'https://www.ablogtowatch.com/wp-content/uploads/2019/09/eBay-Omega-2.jpeg',
-      quantity: 1,
+      quantity: 3,
+      stockQuantity: 1,
       isFavorite: false,
       category: 'watch',
       file: null,
@@ -357,10 +367,15 @@ class HomeProvider with ChangeNotifier {
     }
   }
 
-  String imageCategory(String category) {
+  // String imageCategory(String category) {
+  //   return _products
+  //       .firstWhere((element) => element.category == category)
+  //       .imageCategory;
+  // }
+  int stockQuantityValue(int quantityQuan) {
     return _products
-        .firstWhere((element) => element.category == category)
-        .imageCategory;
+        .firstWhere((element) => element.stockQuantity == quantityQuan)
+        .stockQuantity;
   }
 
   List<Product> productCategory(String category) {
@@ -424,10 +439,19 @@ class HomeProvider with ChangeNotifier {
     return _favoriteItems.length;
   }
 
+  void df(String msg, int quan) {
+    quan = 0;
+  }
+
   void addCart(
       // String productId, String title, double price, String imageUrl,
-      //   String description, int quantity
+      //   String description, int quantity, int stockQuantity,
       Product products) {
+    if (products.quantity > stockQuantityValue(products.stockQuantity)) {
+      // products.quantity = 0;
+
+      return SharedWidget.showToastMsg('Out of Stock ', time: 4);
+    }
     if (_cartItems.containsKey(products.id)) {
       _cartItems.update(
           products.id,
@@ -437,27 +461,37 @@ class HomeProvider with ChangeNotifier {
               // imageUrl: existingCartItem.imageUrl,
               // price: existingCartItem.price,
               // description: existingCartItem.description,
-              // quantity: existingCartItem.quantity + quantity,
+              // quantity: existingCartItem.quantity + products.quantity,
+              // stockQuantity: existingCartItem.stockQuantity,
+
               product: existingCartItem.product));
     } else {
       _cartItems.putIfAbsent(
         products.id,
         () => Cart(
           // id: DateTime.now().toString(),
-          // title: title,
-          // imageUrl: imageUrl,
-          // price: price,
-          // description: description,
-          // quantity: quantity,
+          // title: products.title,
+          // imageUrl: products.imageUrl,
+          // price: products.price,
+          // description:products. description,
+          // quantity:products. quantity,
+          // stockQuantity: products.stockQuantity,
+
           product: products,
         ),
       );
     }
 
     SharedWidget.showToastMsg('Add To Cart Success ', time: 4);
+
     notifyListeners();
-    products.quantity = 1;
   }
+
+  // var prod = Product();
+  // var cart = Cart();
+  // int get stockQuan {
+  //   return prod.stockQuantity - cart.quantity;
+  // }
 
   void removeCartItem(String id) {
     cartItems.remove(id);
@@ -532,7 +566,9 @@ class HomeProvider with ChangeNotifier {
     var total = 0.0;
     _cartItems.forEach(
       (key, cartItem) {
-        total += cartItem.product.price * cartItem.product.quantity;
+        // total += cartItem.product.price * cartItem.product.quantity;
+        total += totalProductPrice(
+            cartItem.product.price, cartItem.product.quantity);
         notifyListeners();
       },
     );

@@ -36,7 +36,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
 initScreen(BuildContext context) {
   return Scaffold(
-    backgroundColor: Colors.redAccent.withOpacity(0.4),
+    backgroundColor: Colors.grey.withOpacity(0.6),
     body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

@@ -26,108 +26,128 @@ class _ProductItemState extends State<ProductItem> {
   @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context);
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
 
-    return Padding(
-        padding: EdgeInsets.symmetric(horizontal: 5),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: Card(
-            child: Container(
-              width: 300,
-              height: 300,
-              child: GridTile(
-                header: Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: ListTile(
-                    leading: CircleAvatar(
-                      radius: MediaQuery.of(context).size.width * 0.06,
-                      backgroundColor: Colors.grey.withOpacity(0.6),
-                      child: IconButton(
-                          icon: Icon(
-                            widget.product.isFavorite
-                                ? Icons.favorite
-                                : Icons.favorite_border,
-                            color: widget.product.isFavorite
-                                ? Colors.red[500]
-                                : Colors.black,
-                            size: 26,
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              widget.product.isFavorite =
-                                  !widget.product.isFavorite;
-                              if (widget.product.isFavorite) {
-                                homeProvider.addFavorite(
-                                  widget.product,
-                                );
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(30),
+      child: Card(
+        child: Container(
+          width: width,
+          height: height * 0.5,
+          decoration: BoxDecoration(
+            // borderRadius: BorderRadius.circular(20),
+            color: Colors.grey.withOpacity(0.6),
+            border: Border.all(
+              color: Colors.redAccent.withOpacity(0.4),
+            ),
+          ),
+          child: GridTile(
+            header: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: ListTile(
+                leading: Container(
+                  width: width * 0.14,
+                  height: height * 0.1,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.grey.withOpacity(0.6),
+                      border:
+                          Border.all(color: Colors.redAccent.withOpacity(0.4))),
+                  child: Center(
+                    child: IconButton(
+                        icon: Icon(
+                          widget.product.isFavorite
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: widget.product.isFavorite
+                              ? Colors.red[500]
+                              : Colors.black,
+                          size: 26,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            widget.product.isFavorite =
+                                !widget.product.isFavorite;
+                            if (widget.product.isFavorite) {
+                              homeProvider.addFavorite(
+                                widget.product,
+                              );
 
-                                // SharedStorage().setCheckFavoritePref(
-                                //     widget.product.id,
-                                //     widget.product.isFavorite);
-                              } else {
-                                homeProvider.removeFavorite(
-                                  widget.product,
-                                );
+                              // SharedStorage().setCheckFavoritePref(
+                              //     widget.product.id,
+                              //     widget.product.isFavorite);
+                            } else {
+                              homeProvider.removeFavorite(
+                                widget.product,
+                              );
 
-                                // SharedStorage().setCheckFavoritePref(
-                                //     widget.product.id,
-                                //     widget.product.isFavorite);
-                              }
-                            });
-                          }),
-                    ),
-                    trailing: CircleAvatar(
-                      radius: MediaQuery.of(context).size.width * 0.06,
-                      backgroundColor: Colors.grey.withOpacity(0.6),
-                      child: Text(
-                        "x ${widget.product.quantity.toString()}",
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
+                              // SharedStorage().setCheckFavoritePref(
+                              //     widget.product.id,
+                              //     widget.product.isFavorite);
+                            }
+                          });
+                        }),
                   ),
                 ),
-                child:
-                    //  Container(
-                    //     width: MediaQuery.of(context).size.width,
-                    //     height: 100,
-                    //     decoration: BoxDecoration(
-                    //         image: DecorationImage(
-                    //             image: NetworkImage(
-                    //               widget.product.imageUrl,
-                    //             ),
-                    //             fit: BoxFit.cover))),
-                    widget.product.file != null
-                        ? Image.file(
-                            widget.product.file,
-                            fit: BoxFit.cover,
-                          )
-                        : Image.network(
-                            widget.product.imageUrl,
-                            fit: BoxFit.cover,
-                          ),
-                footer: Container(
-                  width: double.infinity,
+                trailing: Container(
+                  width: width * 0.14,
+                  height: height * 0.1,
                   decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.6),
-                  ),
-                  child: ListTile(
-                    title: Text(
-                      widget.product.title,
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    subtitle: Text(
-                      widget.product.price.toString(),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                          color: Colors.black54),
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.grey.withOpacity(0.6),
+                      border:
+                          Border.all(color: Colors.redAccent.withOpacity(0.4))),
+                  child: Center(
+                    child: Text(
+                      "x ${widget.product.stockQuantity.toString()}",
+                      style: TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
               ),
             ),
+            child: widget.product.file != null
+                ? Image.file(
+                    widget.product.file,
+                    fit: BoxFit.cover,
+                  )
+                : Image.network(
+                    widget.product.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+
+            //  Container(
+            //     width: MediaQuery.of(context).size.width,
+            //     height: 100,
+            //     decoration: BoxDecoration(
+            //         image: DecorationImage(
+            //             image: NetworkImage(
+            //               widget.product.imageUrl,
+            //             ),
+            //             fit: BoxFit.cover))),
+            footer: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.6),
+              ),
+              child: ListTile(
+                title: Text(
+                  widget.product.title,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                ),
+                subtitle: Text(
+                  widget.product.price.toString(),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                      color: Colors.black54),
+                ),
+              ),
+            ),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

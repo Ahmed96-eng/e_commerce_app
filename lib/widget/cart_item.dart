@@ -1,12 +1,15 @@
 import 'package:ecommerceapp/model/cart.dart';
+import 'package:ecommerceapp/model/product.dart';
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/productDetails.dart';
+import 'package:ecommerceapp/widget/shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CartItem extends StatefulWidget {
   int index;
   Cart cartProduct;
+  Product product;
   CartItem({this.cartProduct, this.index});
 
   @override
@@ -16,16 +19,19 @@ class CartItem extends StatefulWidget {
 class _CartItemState extends State<CartItem> {
   @override
   Widget build(BuildContext context) {
-    final homrProvider = Provider.of<HomeProvider>(context);
+    // final homeProvider = Provider.of<HomeProvider>(context, listen: false);
+
+    final homeProvider = Provider.of<HomeProvider>(context);
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Dismissible(
-      key: Key(homrProvider.cartItems.keys.toList()[widget.index]),
+      key: Key(homeProvider.cartItems.keys.toList()[widget.index]),
       direction: DismissDirection.endToStart,
       background: Container(
         color: Theme.of(context).errorColor,
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.all(16),
+        padding: EdgeInsets.all(10),
+        margin: EdgeInsets.all(20),
         child: Icon(
           Icons.delete,
           size: 50,
@@ -33,8 +39,8 @@ class _CartItemState extends State<CartItem> {
         ),
       ),
       onDismissed: (direction) {
-        homrProvider
-            .removeCartItem(homrProvider.cartItems.keys.toList()[widget.index]);
+        homeProvider
+            .removeCartItem(homeProvider.cartItems.keys.toList()[widget.index]);
       },
       confirmDismiss: (direction) {
         return showDialog(
@@ -98,27 +104,31 @@ class _CartItemState extends State<CartItem> {
                       builder: (context) => ProductDetails(
                             product: widget.cartProduct.product,
                             // id: homrProvider.cartItems.values
-                            //     .toList()[index]
+                            //     .toList()[widget.index]
                             //     .id
                             //     .toString(),
                             // title: homrProvider.cartItems.values
-                            //     .toList()[index]
+                            //     .toList()[widget.index]
                             //     .title,
-                            // imagUrl: homrProvider.cartItems.values
-                            //     .toList()[index]
+                            // imageUrl: homrProvider.cartItems.values
+                            //     .toList()[widget.index]
                             //     .imageUrl,
                             // price: homrProvider.cartItems.values
-                            //     .toList()[index]
+                            //     .toList()[widget.index]
                             //     .price,
-                            // description: homrProvider
-                            //         .cartItems.values
-                            //         .toList()[index]
+                            // description: homrProvider.cartItems.values
+                            //         .toList()[widget.index]
                             //         .description ??
                             //     "",
-                            // quantity: homrProvider
-                            //     .cartItems.values
-                            //     .toList()[index]
+                            // quantity: homrProvider.cartItems.values
+                            //     .toList()[widget.index]
                             //     .quantity,
+                            // stockQuantity: homrProvider.cartItems.values
+                            //     .toList()[widget.index]
+                            //     .stockQuantity,
+                            // file: homrProvider.cartItems.values
+                            //     .toList()[widget.index]
+                            //     .file,
                           )));
             },
             child: Container(
@@ -157,7 +167,7 @@ class _CartItemState extends State<CartItem> {
                         Text(
                           'TotalProducrPrice: ' +
                               '\$ ' +
-                              homrProvider
+                              homeProvider
                                   .totalProductPrice(
                                       widget.cartProduct.product.price,
                                       widget.cartProduct.product.quantity)
@@ -202,6 +212,19 @@ class _CartItemState extends State<CartItem> {
                                       size: 30,
                                     ),
                                     onPressed: () {
+                                      print(
+                                          widget.cartProduct.product.quantity);
+                                      print(widget
+                                          .cartProduct.product.stockQuantity);
+
+                                      if (widget.cartProduct.product.quantity >
+                                          widget.cartProduct.product
+                                                  .stockQuantity -
+                                              1) {
+                                        return SharedWidget.showToastMsg(
+                                            'Out of Stock ',
+                                            time: 4);
+                                      }
                                       setState(() {
                                         widget.cartProduct.product.quantity++;
                                       });

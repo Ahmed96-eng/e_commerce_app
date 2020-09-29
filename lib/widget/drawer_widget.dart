@@ -19,7 +19,7 @@ class DrawerWidget extends StatelessWidget {
               Text(
                 'Hello',
                 style: TextStyle(
-                    color: Colors.red,
+                    color: Colors.grey[800],
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
@@ -40,17 +40,17 @@ class DrawerWidget extends StatelessWidget {
               ),
               ListTileWidget(
                 title: 'Cart Screen',
-                icon: Icons.add_shopping_cart,
+                icon: Icons.shopping_cart,
                 page: CartScreen(),
               ),
               ListTileWidget(
                 title: 'Favorite Screen',
-                icon: Icons.favorite_border,
+                icon: Icons.favorite,
                 page: FavoriteScreen(),
               ),
               ListTileWidget(
                 title: 'DashBoard Screen',
-                icon: Icons.favorite_border,
+                icon: Icons.edit,
                 page: ProductDashBoardScreen(),
               ),
             ],
@@ -81,13 +81,15 @@ class ListTileWidget extends StatelessWidget {
           focusColor: Colors.amber,
           leading: Icon(
             icon,
-            color: Colors.red,
+            color: Colors.grey[800],
             size: 25,
           ),
           title: Text(
             title,
             style: TextStyle(
-                color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
+                color: Colors.grey[700],
+                fontSize: 18,
+                fontWeight: FontWeight.bold),
           ),
         ),
         onTap: () {

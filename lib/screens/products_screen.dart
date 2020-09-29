@@ -42,9 +42,9 @@ class _ProductScreenState extends State<ProductScreen> {
             child: Container(
                 height: height * 0.07,
                 decoration: BoxDecoration(
-                    color: Colors.grey.withOpacity(0.1),
+                    color: Colors.grey.withOpacity(0.2),
                     border: Border.all(
-                      color: Colors.grey[800],
+                      color: Colors.redAccent.withOpacity(0.4),
                     ),
                     borderRadius: BorderRadius.circular(20)),
                 child: TextField(
@@ -96,6 +96,8 @@ class _ProductScreenState extends State<ProductScreen> {
                             // index: index,
                           ),
                           onTap: () {
+                            print(
+                                widget.product[index].stockQuantity.toString());
                             SharedStorage()
                                 .getcheckFavoritePref(widget.product[index].id);
                             print('ONTAPPED ${widget.product[index].id}');
@@ -105,15 +107,18 @@ class _ProductScreenState extends State<ProductScreen> {
                                     builder: (context) => ProductDetails(
                                           // id: widget.product[index].id,
                                           // title: widget.product[index].title,
-                                          // imagUrl:
+                                          // imageUrl:
                                           //     widget.product[index].imageUrl,
                                           // price: widget.product[index].price,
                                           // description:
                                           //     widget.product[index].description,
                                           // quantity:
                                           //     widget.product[index].quantity,
+                                          // stockQuantity: widget
+                                          //     .product[index].stockQuantity,
                                           // isFavorite:
                                           //     widget.product[index].isFavorite,
+                                          // file: widget.product[index].file,
                                           product: widget.product[index],
                                         )));
                           },

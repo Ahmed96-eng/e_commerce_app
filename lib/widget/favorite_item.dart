@@ -26,12 +26,14 @@ class FavoriteItem extends StatelessWidget {
                     builder: (context) => ProductDetails(
                           // id: favoriteProduct.product.id.toString(),
                           // title: favoriteProduct.product.title,
-                          // imagUrl: favoriteProduct.product.imageUrl,
+                          // imageUrl: favoriteProduct.product.imageUrl,
                           // description:
                           //     favoriteProduct.product.description ?? "",
                           // price: favoriteProduct.product.price,
                           // quantity: favoriteProduct.product.quantity,
+                          // stockQuantity: favoriteProduct.product.stockQuantity,
                           // isFavorite: favoriteProduct.product.isFavorite,
+                          // file: favoriteProduct.product.file,
                           product: favoriteProduct.product,
                         )));
           },

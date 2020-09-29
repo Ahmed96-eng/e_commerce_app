@@ -9,6 +9,7 @@ class Product {
   String description;
   double price;
   int quantity;
+  int stockQuantity;
   bool isFavorite;
   String category;
   String imageCategory;
@@ -21,6 +22,7 @@ class Product {
     this.imageUrl,
     this.price,
     this.quantity,
+    this.stockQuantity,
     this.isFavorite = false,
     this.category,
     this.imageCategory,

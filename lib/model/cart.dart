@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ecommerceapp/model/product.dart';
 
 class Cart {
@@ -7,6 +9,8 @@ class Cart {
   // double price;
   // String description;
   // int quantity;
+  // int stockQuantity;
+  // File file;
   Product product;
 
   Cart({
@@ -16,6 +20,8 @@ class Cart {
     // this.price,
     // this.description,
     // this.quantity,
+    // this.stockQuantity,
+    // this.file,
     this.product,
   });
 

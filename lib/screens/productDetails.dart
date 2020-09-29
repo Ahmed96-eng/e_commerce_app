@@ -44,6 +44,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context);
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -109,43 +110,50 @@ class _ProductDetailsState extends State<ProductDetails> {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 trailing: Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: CircleAvatar(
-                    radius: MediaQuery.of(context).size.width * 0.06,
-                    backgroundColor: Colors.redAccent.withOpacity(0.3),
-                    child: IconButton(
-                        icon: Icon(
-                          widget.product.isFavorite
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color: widget.product.isFavorite
-                              ? Colors.red[500]
-                              : Colors.black,
-                          size: 26,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            widget.product.isFavorite =
-                                !widget.product.isFavorite;
-                            if (widget.product.isFavorite) {
-                              homeProvider.addFavorite(
-                                widget.product,
-                              );
+                  padding: const EdgeInsets.only(top: 8),
+                  child: Container(
+                    width: width * 0.12,
+                    height: height * 0.12,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: Colors.grey.withOpacity(0.6),
+                        border: Border.all(
+                            color: Colors.redAccent.withOpacity(0.4))),
+                    child: Center(
+                      child: IconButton(
+                          icon: Icon(
+                            widget.product.isFavorite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: widget.product.isFavorite
+                                ? Colors.red[500]
+                                : Colors.black,
+                            size: 26,
+                          ),
+                          onPressed: () {
+                            setState(() {
+                              widget.product.isFavorite =
+                                  !widget.product.isFavorite;
+                              if (widget.product.isFavorite) {
+                                homeProvider.addFavorite(
+                                  widget.product,
+                                );
 
-                              // SharedStorage().setCheckFavoritePref(
-                              //     widget.product.id,
-                              //     widget.product.isFavorite);
-                            } else {
-                              homeProvider.removeFavorite(
-                                widget.product,
-                              );
+                                // SharedStorage().setCheckFavoritePref(
+                                //     widget.product.id,
+                                //     widget.product.isFavorite);
+                              } else {
+                                homeProvider.removeFavorite(
+                                  widget.product,
+                                );
 
-                              // SharedStorage().setCheckFavoritePref(
-                              //     widget.product.id,
-                              //     widget.product.isFavorite);
-                            }
-                          });
-                        }),
+                                // SharedStorage().setCheckFavoritePref(
+                                //     widget.product.id,
+                                //     widget.product.isFavorite);
+                              }
+                            });
+                          }),
+                    ),
                   ),
                 ),
               ),
@@ -185,6 +193,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                             size: 30,
                           ),
                           onPressed: () {
+                            print(widget.product.quantity);
+                            print(widget.product.stockQuantity);
+                            if (widget.product.quantity >
+                                widget.product.stockQuantity - 1) {
+                              return SharedWidget.showToastMsg('Out of Stock ',
+                                  time: 4);
+                            }
                             setState(() {
                               widget.product.quantity++;
                             });
@@ -202,26 +217,43 @@ class _ProductDetailsState extends State<ProductDetails> {
               builder: (context, homeProvider, child) => Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: RaisedButton.icon(
-                  icon: Icon(Icons.shopping_cart),
-                  label: Padding(
-                    padding: const EdgeInsets.all(16),
-                    child: Text('Add To Cart'),
-                  ),
-                  onPressed: () {
-                    homeProvider.addCart(
-                      widget.product,
-                      // widget.product.id,
-                      // widget.product.title,
-                      // widget.product.price,
-                      // widget.product.imageUrl,
-                      // widget.product.description,
-                      // widget.product.quantity,
-                    );
-                  },
-                  color: Colors.redAccent.withOpacity(0.3),
-                  highlightColor: Colors.black.withOpacity(0.4),
-                ),
+                child: widget.product.quantity >= 0
+                    ? Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.grey.withOpacity(0.6),
+                          border: Border.all(
+                              color: Colors.redAccent.withOpacity(0.4)),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30),
+                          child: RaisedButton.icon(
+                            icon: Icon(Icons.shopping_cart),
+                            label: Padding(
+                              padding: const EdgeInsets.all(16),
+                              child: Text(
+                                'Add To Cart',
+                                style: TextStyle(
+                                    fontSize: 20, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                            onPressed: () {
+                              homeProvider.addCart(
+                                widget.product,
+                                // widget.product.id,
+                                // widget.product.title,
+                                // widget.product.price,
+                                // widget.product.imageUrl,
+                                // widget.product.description,
+                                // widget.product.quantity,
+                              );
+                            },
+                            // color: Colors.grey.withOpacity(0.6),
+                            // highlightColor: Colors.black.withOpacity(0.4),
+                          ),
+                        ),
+                      )
+                    : Container(),
               ),
             ),
             ListTile(
