@@ -106,16 +106,16 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
         });
   }
 
-  List<DropdownMenuItem> itemsConvert(List<String> items) {
-    List<DropdownMenuItem> dropItems = [];
-    for (int i = 0; i < items.length; i++) {
-      dropItems.add(DropdownMenuItem(
-        child: Text(items[i]),
-        value: items[i],
-      ));
-    }
-    return dropItems;
-  }
+  // List<DropdownMenuItem> itemsConvert(List<String> items) {
+  //   List<DropdownMenuItem> dropItems = [];
+  //   for (int i = 0; i < items.length; i++) {
+  //     dropItems.add(DropdownMenuItem(
+  //       child: Text(items[i]),
+  //       value: items[i],
+  //     ));
+  //   }
+  //   return dropItems;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -260,6 +260,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                         description: productDate.description,
                         price: productDate.price,
                         quantity: productDate.quantity,
+                        stockQuantity: productDate.stockQuantity,
                         imageUrl: productDate.imageUrl,
                         isFavorite: productDate.isFavorite,
                         category: value,
@@ -293,6 +294,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                     description: productDate.description,
                     price: productDate.price,
                     quantity: productDate.quantity,
+                    stockQuantity: productDate.stockQuantity,
                     imageUrl: _file.toString(),
                     isFavorite: productDate.isFavorite,
                     category: productDate.category,
@@ -327,6 +329,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                     description: productDate.description,
                     price: double.parse(value),
                     quantity: productDate.quantity,
+                    stockQuantity: productDate.stockQuantity,
                     imageUrl: productDate.imageUrl,
                     isFavorite: productDate.isFavorite,
                     category: productDate.category,
@@ -339,7 +342,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
               TextFormField(
                 controller: _quantityControler,
                 decoration: InputDecoration(
-                    labelText: 'Quantity', hintText: 'quantity'),
+                    labelText: 'Stock Quantity', hintText: 'quantity'),
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.numberWithOptions(),
                 validator: (value) {
@@ -360,7 +363,8 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                     title: productDate.title,
                     description: productDate.description,
                     price: productDate.price,
-                    quantity: int.parse(value),
+                    quantity: productDate.quantity,
+                    stockQuantity: int.parse(value),
                     imageUrl: productDate.imageUrl,
                     isFavorite: productDate.isFavorite,
                     category: productDate.category,
@@ -395,6 +399,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                     description: value,
                     price: productDate.price,
                     quantity: productDate.quantity,
+                    stockQuantity: productDate.stockQuantity,
                     imageUrl: productDate.imageUrl,
                     isFavorite: productDate.isFavorite,
                     category: productDate.category,
@@ -425,7 +430,8 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                       file: _file,
                       image: productDate.imageUrl ?? "",
                       price: productDate.price,
-                      quantity: productDate.quantity,
+                      quantity: 1,
+                      stockQuantity: productDate.stockQuantity,
 
                       category: productDate.category,
 

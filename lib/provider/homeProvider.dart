@@ -336,6 +336,7 @@ class HomeProvider with ChangeNotifier {
     String category,
     String image,
     File file,
+    int stockQuantity,
     int quantity,
     double price,
   }) {
@@ -351,8 +352,8 @@ class HomeProvider with ChangeNotifier {
         imageUrl: image ?? "",
         description: description,
         price: price,
-        quantity: quantity,
-
+        stockQuantity: stockQuantity,
+        quantity: 1,
         category: category,
         file: file,
       );
