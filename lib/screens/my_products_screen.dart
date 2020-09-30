@@ -1,5 +1,6 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
+import 'package:ecommerceapp/screens/product_dashboard_screen.dart';
 import 'package:ecommerceapp/widget/appBar_widget.dart';
 import 'package:ecommerceapp/widget/favorite_item.dart';
 import 'package:ecommerceapp/widget/my_products_widget.dart';
@@ -33,6 +34,14 @@ class MyProductsScreen extends StatelessWidget {
             ),
           ),
           // bottomNavigationBar: BottomNavBarWidget(pageIndex: pageIndex),
+          floatingActionButton: FloatingActionButton(
+            backgroundColor: Colors.black54,
+            child: Icon(Icons.add),
+            tooltip: 'Add',
+            onPressed: () {
+              Navigator.of(context).pushNamed(ProductDashBoardScreen.route);
+            },
+          ),
         ),
       ),
     );
