@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'dart:convert';
-
 import 'package:ecommerceapp/model/product.dart';
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:flutter/material.dart';

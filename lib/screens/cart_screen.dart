@@ -1,16 +1,12 @@
-import 'package:ecommerceapp/model/cart.dart';
 import 'package:ecommerceapp/model/product.dart';
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
-import 'package:ecommerceapp/screens/order_screen.dart';
-import 'package:ecommerceapp/screens/productDetails.dart';
 import 'package:ecommerceapp/widget/appBar_widget.dart';
-import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
 import 'package:ecommerceapp/widget/cart_item.dart';
-import 'package:ecommerceapp/widget/shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class CartScreen extends StatefulWidget {
   static const route = 'cart_screen';
   // Cart cartProduct;

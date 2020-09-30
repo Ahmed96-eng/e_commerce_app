@@ -1,14 +1,9 @@
-import 'package:ecommerceapp/model/favorite.dart';
 import 'package:ecommerceapp/model/product.dart';
-
 import 'package:ecommerceapp/provider/homeProvider.dart';
-import 'package:ecommerceapp/screens/productDetails.dart';
-import 'package:ecommerceapp/widget/shared_storage.dart';
-import 'package:ecommerceapp/widget/shared_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class ProductItem extends StatefulWidget {
   Product product;
   ProductItem({this.product});

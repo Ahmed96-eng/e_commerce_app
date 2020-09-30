@@ -4,6 +4,7 @@ import '../screens/home_screen.dart';
 import '../screens/favorite_screen.dart';
 import '../screens/profile_screen.dart';
 
+// ignore: must_be_immutable
 class BottomNavBarWidget extends StatefulWidget {
   static const route = 'bottom_bar_widget';
   int pageIndex;
@@ -15,12 +16,12 @@ class BottomNavBarWidget extends StatefulWidget {
 class _BottomNavBarWidgetState extends State<BottomNavBarWidget> {
   int _pageIndex = 0;
 
-  List<Map<String, Object>> _pages = [
-    {'page0': HomeScreen()},
-    {'page1': FavoriteScreen()},
-    {'page2': CartScreen()},
-    {'page3': ProfileScreen()},
-  ];
+  // List<Map<String, Object>> _pages = [
+  //   {'page0': HomeScreen()},
+  //   {'page1': FavoriteScreen()},
+  //   {'page2': CartScreen()},
+  //   {'page3': ProfileScreen()},
+  // ];
 
   List<Widget> pages = [
     HomeScreen(),

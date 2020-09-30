@@ -1,4 +1,3 @@
-import 'package:ecommerceapp/model/order.dart';
 import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
@@ -67,6 +66,7 @@ class DrawerWidget extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ListTileWidget extends StatelessWidget {
   IconData icon;
   String title;

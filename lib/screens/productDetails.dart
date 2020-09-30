@@ -2,15 +2,12 @@ import 'package:ecommerceapp/model/product.dart';
 import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
-import 'package:ecommerceapp/widget/appBar_widget.dart';
 import 'package:ecommerceapp/widget/badge.dart';
-import 'package:ecommerceapp/widget/bottom_bar_widget.dart';
-import 'package:ecommerceapp/widget/shared_storage.dart';
 import 'package:ecommerceapp/widget/shared_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class ProductDetails extends StatefulWidget {
   // String title, imagUrl, id, description;
   // double price;

@@ -1,5 +1,4 @@
 import 'package:ecommerceapp/provider/homeProvider.dart';
-
 import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
@@ -10,7 +9,6 @@ import 'package:ecommerceapp/screens/profile_screen.dart';
 import 'package:ecommerceapp/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'widget/bottom_bar_widget.dart';
 
 void main() => runApp(MyApp());
 

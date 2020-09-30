@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
-
 class Product {
   String id;
   String title;

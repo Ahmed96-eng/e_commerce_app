@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:ecommerceapp/model/product.dart';
 
 class Cart {

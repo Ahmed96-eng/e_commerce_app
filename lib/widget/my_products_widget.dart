@@ -1,13 +1,11 @@
-import 'package:ecommerceapp/model/favorite.dart';
 import 'package:ecommerceapp/model/product.dart';
 import 'package:ecommerceapp/provider/homeProvider.dart';
-import 'package:ecommerceapp/screens/my_products_screen.dart';
-import 'package:ecommerceapp/screens/productDetails.dart';
 import 'package:ecommerceapp/screens/product_dashboard_screen.dart';
 import 'package:ecommerceapp/widget/shared_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class MyProductsItem extends StatelessWidget {
   Product myProduct;
   MyProductsItem({this.myProduct});

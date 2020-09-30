@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
-
 import 'package:ecommerceapp/model/cart.dart';
-import 'package:ecommerceapp/model/category.dart';
 import 'package:ecommerceapp/model/favorite.dart';
 import 'package:ecommerceapp/model/order.dart';
 import 'package:ecommerceapp/model/product.dart';
