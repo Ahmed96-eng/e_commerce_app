@@ -46,10 +46,15 @@ class FavoriteItem extends StatelessWidget {
                 Container(
                   width: width * 0.3,
                   height: height * 0.2,
-                  child: Image.network(
-                    favoriteProduct.product.imageUrl,
-                    fit: BoxFit.cover,
-                  ),
+                  child: favoriteProduct.product.file != null
+                      ? Image.file(
+                          favoriteProduct.product.file,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.network(
+                          favoriteProduct.product.imageUrl,
+                          fit: BoxFit.cover,
+                        ),
                 ),
                 SizedBox(width: 16),
                 Padding(
@@ -58,10 +63,15 @@ class FavoriteItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        favoriteProduct.product.title,
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                      Container(
+                        width: width * 0.45,
+                        child: Text(
+                          favoriteProduct.product.title,
+                          softWrap: true,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
                       ),
                       SizedBox(height: 10),
                       Text(

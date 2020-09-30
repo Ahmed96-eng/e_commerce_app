@@ -2,6 +2,7 @@ import 'package:ecommerceapp/model/order.dart';
 import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
+import 'package:ecommerceapp/screens/my_products_screen.dart';
 import 'package:ecommerceapp/screens/order_screen.dart';
 import 'package:ecommerceapp/screens/product_dashboard_screen.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,11 @@ class DrawerWidget extends StatelessWidget {
                 title: 'DashBoard Screen',
                 icon: Icons.edit,
                 page: ProductDashBoardScreen(),
+              ),
+              ListTileWidget(
+                title: 'My Products Screen',
+                icon: Icons.view_list,
+                page: MyProductsScreen(),
               ),
             ],
           ),

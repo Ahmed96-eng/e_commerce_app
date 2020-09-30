@@ -140,10 +140,15 @@ class _CartItemState extends State<CartItem> {
                   Container(
                     width: width * 0.3,
                     height: height * 0.2,
-                    child: Image.network(
-                      widget.cartProduct.product.imageUrl,
-                      fit: BoxFit.cover,
-                    ),
+                    child: widget.cartProduct.product.file != null
+                        ? Image.file(
+                            widget.cartProduct.product.file,
+                            fit: BoxFit.cover,
+                          )
+                        : Image.network(
+                            widget.cartProduct.product.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
                   ),
                   SizedBox(width: 16),
                   Padding(
@@ -152,12 +157,15 @@ class _CartItemState extends State<CartItem> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          widget.cartProduct.product.title,
-                          softWrap: true,
-                          overflow: TextOverflow.fade,
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                        Container(
+                          width: width * 0.5,
+                          child: Text(
+                            widget.cartProduct.product.title,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
                         ),
                         SizedBox(height: 5),
                         Text('Price: ' +

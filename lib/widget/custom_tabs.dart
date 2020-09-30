@@ -32,7 +32,10 @@ Widget customTabs(
           ),
         ),
         Tab(
-          child: Text(title),
+          child: Text(
+            title,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     ),

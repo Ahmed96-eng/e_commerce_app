@@ -17,51 +17,128 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
   final _form = GlobalKey<FormState>();
   File _file;
   final picker = ImagePicker();
-  var valueProperty;
+
   List<DropdownMenuItem> dropdownMenuItem = List();
   TextEditingController _titleControler;
   TextEditingController _priceControler;
-  TextEditingController _quantityControler;
+  TextEditingController _stockQuantityControler;
   TextEditingController _descriptionControler;
   TextEditingController _imageControler;
 
   final _priceFoucsNode = FocusNode();
   final _descriptionFoucsNode = FocusNode();
   final _quantityFoucsNode = FocusNode();
-
+  var valueProperty;
+  String image;
   var productDate = Product(
-    id: DateTime.now().toIso8601String(),
+    id: null,
     title: '',
     description: '',
     price: 0,
     quantity: 0,
+    stockQuantity: 0,
     imageUrl: '',
     isFavorite: false,
     category: '',
     file: null,
   );
 
+  var _isInit = true;
+  // var _initialProductvalue = {
+  //   "title": "",
+  //   "description": "",
+  //   "price": "",
+  //   "stocQuantity": "",
+  //   "category": "",
+  //   "file": "",
+  // };
+
   @override
   void initState() {
     _titleControler = TextEditingController();
     _priceControler = TextEditingController();
-    _quantityControler = TextEditingController();
+    _stockQuantityControler = TextEditingController();
     _descriptionControler = TextEditingController();
     _imageControler = TextEditingController();
     super.initState();
   }
 
   @override
+  void didChangeDependencies() {
+    if (_isInit) {
+      final productId = ModalRoute.of(context).settings.arguments as String;
+      if (productId != null) {
+        productDate = Provider.of<HomeProvider>(context, listen: false)
+            .findById(productId);
+        _titleControler.text = productDate.title;
+        _descriptionControler.text = productDate.description;
+        _stockQuantityControler.text = productDate.stockQuantity.toString();
+        _priceControler.text = productDate.price.toString();
+        valueProperty = productDate.category;
+        _file = productDate.file;
+        image = productDate.imageUrl;
+        _imageControler.text = productDate.imageUrl;
+      }
+    }
+    _isInit = false;
+
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     _titleControler.dispose();
     _priceControler.dispose();
-    _quantityControler.dispose();
+    _stockQuantityControler.dispose();
     _descriptionControler.dispose();
     _imageControler.dispose();
     _priceFoucsNode.dispose();
     _descriptionFoucsNode.dispose();
     _quantityFoucsNode.dispose();
     super.dispose();
+  }
+
+  void _saveForm() async {
+    bool _isValidate = _form.currentState.validate();
+    if (!_isValidate) {
+      return;
+    }
+    _form.currentState.save();
+    if (productDate.id != null) {
+      Provider.of<HomeProvider>(context, listen: false)
+          .updataProduct(id: productDate.id, editProduct: productDate);
+      Navigator.of(context).pop();
+    } else {
+      try {
+        Provider.of<HomeProvider>(context, listen: false).addProduct1(
+          // id: productDate.id,
+          title: productDate.title,
+          description: _descriptionControler.text,
+          file: _file,
+          image: productDate.imageUrl ?? "",
+          price: productDate.price,
+          quantity: 1,
+          stockQuantity: productDate.stockQuantity,
+          category: productDate.category,
+        );
+        Navigator.of(context).pop();
+      } catch (error) {
+        return showDialog(
+            context: context,
+            child: AlertDialog(
+              title: Text('Error'),
+              content: Text(error),
+              actions: [
+                FlatButton(
+                  child: Text('Ok'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            ));
+      }
+    }
   }
 
   Future<void> _showUploadDialog(BuildContext context) {
@@ -106,23 +183,19 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
         });
   }
 
-  // List<DropdownMenuItem> itemsConvert(List<String> items) {
-  //   List<DropdownMenuItem> dropItems = [];
-  //   for (int i = 0; i < items.length; i++) {
-  //     dropItems.add(DropdownMenuItem(
-  //       child: Text(items[i]),
-  //       value: items[i],
-  //     ));
-  //   }
-  //   return dropItems;
-  // }
-
   @override
   Widget build(BuildContext context) {
     final homeProvider = Provider.of<HomeProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Product DashBoard'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.save),
+              onPressed: () {
+                _saveForm();
+              })
+        ],
       ),
       body: SingleChildScrollView(
           child: Padding(
@@ -138,6 +211,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                   child: Card(
                       shape: Border.all(
                           // color: colorImage ? Colors.red : Colors.black,
+                          color: Colors.redAccent.withOpacity(0.6),
                           width: 2),
                       child: _file == null
                           ? RaisedButton.icon(
@@ -153,44 +227,58 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                           : Container(
                               decoration:
                                   new BoxDecoration(color: Colors.white),
-                              //  height: 240,
                               height: MediaQuery.of(context).size.height * 0.3,
                               width: MediaQuery.of(context).size.width,
                               child: Stack(
                                 children: <Widget>[
-                                  Image.file(
-                                    _file,
-                                    width: MediaQuery.of(context).size.width,
-                                    fit: BoxFit.cover,
-                                    height: MediaQuery.of(context).size.height *
-                                        0.3,
-                                    // fit: BoxFit.contain,
-                                  ),
-                                  Positioned(
-                                      top: 0,
-                                      right:
-                                          0, //give the values according to your requirement
-                                      child: ClipOval(
-                                        child: Material(
-                                          color: Colors.teal, // button color
-                                          child: InkWell(
-                                            splashColor:
-                                                Colors.teal, // inkwell color
-                                            child: SizedBox(
-                                                width: 40,
-                                                height: 40,
-                                                child: Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                )),
-                                            onTap: () {
-                                              setState(() {
-                                                _file = null;
-                                              });
-                                            },
-                                          ),
+                                  _imageControler.text.isEmpty
+                                      ? Image.file(
+                                          _file,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          fit: BoxFit.cover,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.3,
+                                          // fit: BoxFit.contain,
+                                        )
+                                      : Image.network(
+                                          image,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          fit: BoxFit.cover,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.3,
                                         ),
-                                      )),
+                                  Positioned(
+                                    top: 5,
+                                    right:
+                                        5, //give the values according to your requirement
+                                    child: Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: Colors.grey[500],
+                                          border: Border.all(
+                                              color: Colors.redAccent
+                                                  .withOpacity(0.4))),
+                                      child: IconButton(
+                                          icon: Icon(
+                                            Icons.close,
+                                            size: 25,
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              _file = null;
+                                            });
+                                          }),
+                                    ),
+                                  ),
                                 ],
                               )))),
 
@@ -253,6 +341,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                         valueProperty = value;
                       });
                     },
+
                     onSaved: (value) {
                       productDate = Product(
                         id: productDate.id,
@@ -340,7 +429,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
 
               // Quantity TextField
               TextFormField(
-                controller: _quantityControler,
+                controller: _stockQuantityControler,
                 decoration: InputDecoration(
                     labelText: 'Stock Quantity', hintText: 'quantity'),
                 textInputAction: TextInputAction.next,
@@ -379,7 +468,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                 decoration: InputDecoration(
                     labelText: 'Description', hintText: 'description'),
                 maxLines: 3,
-                textInputAction: TextInputAction.newline,
+                textInputAction: TextInputAction.done,
                 keyboardType: TextInputType.multiline,
                 validator: (value) {
                   if (value.isEmpty) {
@@ -415,28 +504,31 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                   icon: Icon(Icons.add),
                   label: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Text('Submit'),
+                    child: Text(
+                      'Submit',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
                   ),
+                  color: Colors.grey.withOpacity(0.6),
+                  highlightColor: Colors.black.withOpacity(0.4),
                   onPressed: () {
-                    // String base64Image = "data:image/png;base64," +
-                    //     base64Encode(_file.readAsBytesSync());
-                    // print("mmmxxxxxxxcccccccccvvvvvvvvvvvvm" + base64Image);
-                    _form.currentState.validate();
-                    _form.currentState.save();
-                    homeProvider.addProduct1(
-                      // id: productDate.id,
-                      title: productDate.title,
-                      description: _descriptionControler.text,
-                      file: _file,
-                      image: productDate.imageUrl ?? "",
-                      price: productDate.price,
-                      quantity: 1,
-                      stockQuantity: productDate.stockQuantity,
+                    _saveForm();
 
-                      category: productDate.category,
-
-                      // file: productDate.file,
-                    );
+                    // _form.currentState.validate();
+                    // _form.currentState.save();
+                    // homeProvider.addProduct1(
+                    //   // id: productDate.id,
+                    //   title: productDate.title,
+                    //   description: _descriptionControler.text,
+                    //   file: _file,
+                    //   image: productDate.imageUrl ?? "",
+                    //   price: productDate.price,
+                    //   quantity: 1,
+                    //   stockQuantity: productDate.stockQuantity,
+                    //   category: productDate.category,
+                    // );
+                    // Navigator.of(context).pop();
 
                     print('4444444444444444444444444444444444444444');
                     print(productDate.id);
@@ -448,10 +540,7 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                     print(productDate.price);
                     print(productDate.isFavorite);
                     print(productDate.file);
-                    Navigator.of(context).pop();
                   },
-                  color: Colors.redAccent.withOpacity(0.3),
-                  highlightColor: Colors.black.withOpacity(0.4),
                 ),
               ),
             ],

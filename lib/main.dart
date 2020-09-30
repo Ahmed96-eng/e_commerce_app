@@ -3,6 +3,7 @@ import 'package:ecommerceapp/provider/homeProvider.dart';
 import 'package:ecommerceapp/screens/cart_screen.dart';
 import 'package:ecommerceapp/screens/favorite_screen.dart';
 import 'package:ecommerceapp/screens/home_screen.dart';
+import 'package:ecommerceapp/screens/my_products_screen.dart';
 import 'package:ecommerceapp/screens/order_screen.dart';
 import 'package:ecommerceapp/screens/product_dashboard_screen.dart';
 import 'package:ecommerceapp/screens/profile_screen.dart';
@@ -39,6 +40,7 @@ class MyApp extends StatelessWidget {
           HomeScreen.route: (context) => HomeScreen(),
           ProfileScreen.route: (context) => ProfileScreen(),
           ProductDashBoardScreen.route: (context) => ProductDashBoardScreen(),
+          MyProductsScreen.route: (context) => MyProductsScreen(),
         },
       ),
     );

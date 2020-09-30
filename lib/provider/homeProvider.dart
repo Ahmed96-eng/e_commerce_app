@@ -417,7 +417,7 @@ class HomeProvider with ChangeNotifier {
     return _imageCategories.toList();
   }
 
-  void updataProduct(String id, Product editProduct) {
+  void updataProduct({String id, Product editProduct}) {
     final prodIndex = _products.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
       _products[prodIndex] = editProduct;
@@ -430,6 +430,10 @@ class HomeProvider with ChangeNotifier {
   void deleteProduct(String id) {
     _products.removeWhere((prod) => prod.id == id);
     notifyListeners();
+  }
+
+  Product findById(String id) {
+    return _products.firstWhere((prod) => prod.id == id);
   }
 
   int get cartCount {
@@ -596,14 +600,6 @@ class HomeProvider with ChangeNotifier {
 
   void clearCart() {
     _cartItems.clear();
-    notifyListeners();
-  }
-
-  bool _favorite = false;
-  bool get getFavorite => _favorite;
-
-  void changeFavoriteValue(bool favorite) {
-    _favorite = favorite;
     notifyListeners();
   }
 }

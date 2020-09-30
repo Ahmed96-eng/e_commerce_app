@@ -137,7 +137,7 @@ class _ProductItemState extends State<ProductItem> {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 subtitle: Text(
-                  widget.product.price.toString(),
+                  "Price : ${widget.product.price.toString()} \$",
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
