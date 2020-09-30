@@ -229,28 +229,14 @@ class _ProductDashBoardScreenState extends State<ProductDashBoardScreen> {
                               width: MediaQuery.of(context).size.width,
                               child: Stack(
                                 children: <Widget>[
-                                  _imageControler.text.isEmpty
-                                      ? Image.file(
-                                          _file,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          fit: BoxFit.cover,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.3,
-                                          // fit: BoxFit.contain,
-                                        )
-                                      : Image.network(
-                                          image,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          fit: BoxFit.cover,
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.3,
-                                        ),
+                                  Image.file(
+                                    _file,
+                                    width: MediaQuery.of(context).size.width,
+                                    fit: BoxFit.cover,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.3,
+                                    // fit: BoxFit.contain,
+                                  ),
                                   Positioned(
                                     top: 5,
                                     right:
